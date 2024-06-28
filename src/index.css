@@ -113,7 +113,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(44, 44, 44, 0.1); /* Semi-transparent dark background */
+  background: rgba(44, 44, 44, 0.2); /* Semi-transparent dark background */
   overflow-y: scroll; /* Enable scrolling */
   backdrop-filter: blur(10px); /* Glass effect */
   border-radius: 8px;
@@ -294,7 +294,10 @@ body {
     .water,
     .gelato,
     .espresso,
-    .coffee
+    .coffee,
+    .tea,
+    .topping,
+    .fruits
   ) {
   width: 100%;
   height: 0px;
@@ -323,7 +326,10 @@ body {
     .whiskey,
     .water,
     .espresso,
-    .coffee
+    .coffee,
+    .tea,
+    .topping,
+    .fruits
   )::before {
   content: "";
   display: block;
@@ -378,6 +384,21 @@ body {
   background: #5a341a;
   z-index: 4;
 }
+
+.contents .tea {
+  background: #6ba36c;
+  z-index: 4;
+}
+
+.contents .topping {
+  background: #f6d193;
+  z-index: 3;
+}
+
+.contents .fruits {
+  background: #ff6174;
+  z-index: 3;
+}
 .contents .gelato {
   background: #fcf9ea;
   z-index: 4;
@@ -388,6 +409,145 @@ body {
 }
 .contents .espresso span {
   display: none;
+}
+
+/* Tea */
+.tea .tea {
+  height: 90%;
+  border-radius: 50% / 10%;
+  padding-top: 0px;
+  color: rgb(0, 0, 0);
+}
+.tea .tea::before {
+  opacity: 0.1;
+  background: white;
+  top: 0%;
+}
+
+/* Cheese Tea */
+
+.cheese-tea .tea {
+  color: rgb(0, 0, 0);
+  height: 60%;
+  margin-top: -21px;
+  padding-top: 20px;
+}
+.cheese-tea .tea::before {
+  background: none;
+}
+.cheese-tea .foam {
+  color: rgba(0, 0, 0, 1);
+  height: 40%;
+  margin-top: -20px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.cheese-tea .foam::before {
+  background: #faf8f5;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  opacity: 1;
+}
+
+/* fruits tea */
+
+.fruits-tea .tea {
+  color: rgba(0, 0, 0, 1);
+  height: 60%;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.fruits-tea .tea::before {
+  background: #6ba36c;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  opacity: 1;
+  top: 0;
+}
+.fruits-tea .fruits {
+  color: rgba(255, 255, 255, 1);
+  height: 30%;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+
+/* Milk Tea */
+.milk-tea .milk {
+  height: 40%;
+  color: rgba(0, 0, 0, 1);
+  height: 40%;
+  padding-top: 20px;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.milk-tea .tea {
+  height: 60%;
+  color: rgb(0, 0, 0); /* Tea color */
+  margin-top: -21px;
+  padding-top: 20px;
+}
+.milk-tea .milk::before {
+  background: #faf8f5;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  opacity: 1;
+}
+
+/* Milk Tea with Toppings */
+
+.milk-tea-with-toppings .topping {
+  color: rgba(255, 255, 255, 1);
+  height: 30%;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+.milk-tea-with-toppings .topping::before {
+  top: -33%;
+}
+.milk-tea-with-toppings .tea {
+  color: rgba(0, 0, 0, 1);
+  height: 40%;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+.milk-tea-with-toppings .milk {
+  color: rgba(0, 0, 0, 1);
+  height: 40%;
+  padding-top: 20px;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.milk-tea-with-toppings .milk::before {
+  background: #faf8f5;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  opacity: 1;
+}
+
+/* Milk Tea with Coffee */
+
+.yuan-yang .espresso {
+  color: rgba(255, 255, 255, 1);
+  height: 30%;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+.yuan-yang .topping::before {
+  top: -33%;
+}
+.yuan-yang .tea {
+  color: rgba(0, 0, 0, 1);
+  height: 40%;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+.yuan-yang .milk {
+  color: rgba(0, 0, 0, 1);
+  height: 40%;
+  padding-top: 20px;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.yuan-yang .milk::before {
+  background: #faf8f5;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  opacity: 1;
 }
 
 /* Black Coffee */

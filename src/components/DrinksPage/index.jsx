@@ -10,6 +10,12 @@ const DrinksPage = () => {
   const [selectedDrink, setSelectedDrink] = useState("black");
 
   const drinkOptions = [
+    "Tea",
+    "Cheese Tea",
+    "Fruits Tea",
+    "Milk Tea",
+    "Milk Tea with toppings",
+    "Yuan Yang",
     "Black",
     "Flat White",
     "Latte",
@@ -68,6 +74,9 @@ const DrinksPage = () => {
             <div className="whiskey">whiskey</div>
             <div className="water">water</div>
             <div className="coffee">coffee</div>
+            <div className="tea">tea</div>
+            <div className="topping">topping</div>
+            <div className="fruits">fruits</div>
             <div className="espresso">
               <span>(2)&nbsp;</span>espresso
             </div>
