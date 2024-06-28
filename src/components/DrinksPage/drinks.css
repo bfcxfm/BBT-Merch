@@ -1,84 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 * {
   box-sizing: border-box;
 }
-
 html,
 body {
   height: 100%;
@@ -90,8 +13,8 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
-  /* font-family: Poppins; */
-  background: #1e1e1e;
+  font-family: Poppins;
+  background: #cebca6;
 }
 @media screen and (max-height: 500px) {
   body > * {
@@ -109,57 +32,165 @@ body {
 .options {
   position: relative;
   width: 200px;
-  height: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: rgba(44, 44, 44, 0.1); /* Semi-transparent dark background */
-  overflow-y: scroll; /* Enable scrolling */
-  backdrop-filter: blur(10px); /* Glass effect */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding-top: 10px; /* Add padding to avoid options touching the edges */
-}
-
-/* Hide scrollbar for Webkit-based browsers (Chrome, Safari) */
-.options::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-/* Hide scrollbar for Firefox */
-.options {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-/* Style for the individual options */
-.options > div {
-  width: 90%; /* Add some padding on the sides */
-  margin-bottom: 10px; /* Space between options */
+  text-align: left;
+  background: rgba(0, 0, 0, 0.04);
   padding: 12px;
-  text-align: center;
-  font-size: 16px;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-
-  color: #f0f0f0; /* Light text color */
-  border-radius: 5px; /* Rounded corners for a modern touch */
 }
-
+.options > div {
+  transition: all 0.1s ease-in-out;
+}
 .options > div:hover {
-  background: rgba(255, 255, 255, 0.2); /* A bit more opaque on hover */
+  background: rgba(255, 255, 255, 1);
   cursor: pointer;
-  font-size: 18px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 255, 255, 0.1);
-  color: #f5a623; /* Light orange color for text */
+  font-size: 22px;
+  box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.2),
+    0 0 3px 2px rgba(255, 255, 255, 0.1), 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  color: #462814be;
 }
-
-/* Style for the selected option */
-.options .selected {
-  background: rgba(255, 255, 255, 0.3); /* Highlight selected option */
-  color: #ffffff; /* White color for selected text */
+.options:hover > * {
+  animation-play-state: paused;
 }
-
+.options {
+  background: none;
+  height: fit-content;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0%;
+  margin: auto;
+  translate: 259px 12px;
+  transform-origin: -157px 107%;
+  rotate: -100deg;
+}
+@keyframes rotateC {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+.options > div {
+  --_speed: 4;
+  color: #4628148e;
+  position: absolute;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform-origin: -145px 50%;
+  padding: 4px 12px 1px 22px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  animation: rotateC calc(var(--_speed) * 36s) linear infinite;
+}
+.options > div:nth-child(1) {
+  animation-delay: calc(var(--_speed) * -1s);
+}
+.options > div:nth-child(2) {
+  animation-delay: calc(var(--_speed) * -2s);
+}
+.options > div:nth-child(3) {
+  animation-delay: calc(var(--_speed) * -3s);
+}
+.options > div:nth-child(4) {
+  animation-delay: calc(var(--_speed) * -4s);
+}
+.options > div:nth-child(5) {
+  animation-delay: calc(var(--_speed) * -5s);
+}
+.options > div:nth-child(6) {
+  animation-delay: calc(var(--_speed) * -6s);
+}
+.options > div:nth-child(7) {
+  animation-delay: calc(var(--_speed) * -7s);
+}
+.options > div:nth-child(8) {
+  animation-delay: calc(var(--_speed) * -8s);
+}
+.options > div:nth-child(9) {
+  animation-delay: calc(var(--_speed) * -9s);
+}
+.options > div:nth-child(10) {
+  animation-delay: calc(var(--_speed) * -10s);
+}
+.options > div:nth-child(11) {
+  animation-delay: calc(var(--_speed) * -11s);
+}
+.options > div:nth-child(12) {
+  animation-delay: calc(var(--_speed) * -12s);
+}
+.options > div:nth-child(13) {
+  animation-delay: calc(var(--_speed) * -13s);
+}
+.options > div:nth-child(14) {
+  animation-delay: calc(var(--_speed) * -14s);
+}
+.options > div:nth-child(15) {
+  animation-delay: calc(var(--_speed) * -15s);
+}
+.options > div:nth-child(16) {
+  animation-delay: calc(var(--_speed) * -16s);
+}
+.options > div:nth-child(17) {
+  animation-delay: calc(var(--_speed) * -17s);
+}
+.options > div:nth-child(18) {
+  animation-delay: calc(var(--_speed) * -18s);
+}
+.options > div:nth-child(19) {
+  animation-delay: calc(var(--_speed) * -19s);
+}
+.options > div:nth-child(20) {
+  animation-delay: calc(var(--_speed) * -20s);
+}
+.options > div:nth-child(21) {
+  animation-delay: calc(var(--_speed) * -21s);
+}
+.options > div:nth-child(22) {
+  animation-delay: calc(var(--_speed) * -22s);
+}
+.options > div:nth-child(23) {
+  animation-delay: calc(var(--_speed) * -23s);
+}
+.options > div:nth-child(24) {
+  animation-delay: calc(var(--_speed) * -24s);
+}
+.options > div:nth-child(25) {
+  animation-delay: calc(var(--_speed) * -25s);
+}
+.options > div:nth-child(26) {
+  animation-delay: calc(var(--_speed) * -26s);
+}
+.options > div:nth-child(27) {
+  animation-delay: calc(var(--_speed) * -27s);
+}
+.options > div:nth-child(28) {
+  animation-delay: calc(var(--_speed) * -28s);
+}
+.options > div:nth-child(29) {
+  animation-delay: calc(var(--_speed) * -29s);
+}
+.options > div:nth-child(30) {
+  animation-delay: calc(var(--_speed) * -30s);
+}
+.options > div:nth-child(31) {
+  animation-delay: calc(var(--_speed) * -31s);
+}
+.options > div:nth-child(32) {
+  animation-delay: calc(var(--_speed) * -32s);
+}
+.options > div:nth-child(33) {
+  animation-delay: calc(var(--_speed) * -33s);
+}
+.options > div:nth-child(34) {
+  animation-delay: calc(var(--_speed) * -34s);
+}
+.options > div:nth-child(35) {
+  animation-delay: calc(var(--_speed) * -35s);
+}
 .wrapper {
   position: relative;
   width: 300px;
@@ -167,33 +198,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(45deg, #0ff, #00f);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.5),
-    0 0 40px rgba(0, 255, 255, 0.5), 0 0 80px rgba(0, 255, 255, 0.5),
-    0 0 160px rgba(0, 255, 255, 0.5);
-  border-radius: 10px;
-  transform: rotateX(15deg) rotateY(15deg);
-  perspective: 1000px;
+  border-radius: 50%;
+  background-color: #9b8c83;
+  background: repeating-linear-gradient(
+      45deg,
+      #9c7154,
+      #ffdfca 8px,
+      #fff0 8px,
+      #fff0 25px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      #7a5943,
+      #ffcaa6 8px,
+      #fff0 8px,
+      #fff0 25px
+    );
+  background-color: #533723;
+  box-shadow: 0 0 1px 1px #7a665a, 0 0 4px 2px #9b8c83,
+    inset 0 -630px 20px -500px #c59473, inset 0 -680px 40px -500px #9c7154,
+    inset 0 -700px 0 -500px #775843;
+
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-
-/* .wrapper::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  border: 2px solid #0ff;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.5),
-    0 0 40px rgba(0, 255, 255, 0.5), 0 0 80px rgba(0, 255, 255, 0.5),
-    0 0 160px rgba(0, 255, 255, 0.5);
-  border-radius: 10px;
-  transform: translateZ(-50px);
-} */
-
 .shadow {
   position: absolute;
   top: 69.7%;
