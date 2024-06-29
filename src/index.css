@@ -401,7 +401,7 @@ body {
 }
 .contents .gelato {
   background: #fcf9ea;
-  z-index: 4;
+  z-index: 10;
 }
 .contents .espresso {
   background: #462814;
@@ -545,6 +545,39 @@ body {
   border-top: 1px dashed rgba(75, 75, 75, 0.3);
 }
 .yuan-yang .milk::before {
+  background: #faf8f5;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  opacity: 1;
+}
+
+/* Milk Tea with Ice cream */
+
+.milk-tea-with-ice-cream .gelato {
+  opacity: 1;
+  color: rgba(0, 0, 0, 1);
+  height: 25%;
+  padding-top: 10px;
+  width: 75%;
+  border-radius: 100% 100% 50% 50%;
+  border: 1px dashed rgba(75, 75, 75, 0.5);
+  border-bottom: none;
+}
+
+.milk-tea-with-ice-cream .milk {
+  margin-top: -16px;
+  color: rgba(0, 0, 0, 1);
+  height: 30%;
+  padding-top: 20px;
+  border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+  /* border-top: 1px dashed rgba(75, 75, 75, 0.3); */
+}
+.milk-tea-with-ice-cream .tea {
+  height: 60%;
+  color: rgb(0, 0, 0); /* Tea color */
+  margin-top: -21px;
+  padding-top: 20px;
+}
+.milk-tea-with-ice-cream .milk::before {
   background: #faf8f5;
   border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
   opacity: 1;

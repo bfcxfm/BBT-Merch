@@ -15,36 +15,23 @@ const DrinksPage = () => {
     "Fruits Tea",
     "Milk Tea",
     "Milk Tea with toppings",
+    "Milk Tea with ice cream",
     "Yuan Yang",
     "Black",
-    "Flat White",
-    "Latte",
-    "Cappuccino",
     "Americano",
-    "Espresso",
-    "Doppio",
-    "Cortado",
-    "Macchiato",
+    "Latte",
     "Mocha",
+    "Macchiato",
     "Affogato",
-    "Con Panna",
-    "Irish",
-    "Cafe Au Lait",
-    // Repeats
-    // "Black",
-    // "Flat White",
-    // "Latte",
     // "Cappuccino",
-    // "Americano",
+    // "Flat White",
     // "Espresso",
     // "Doppio",
     // "Cortado",
-    // "Macchiato",
-    // "Mocha",
-    // "Affogato",
     // "Con Panna",
     // "Irish",
     // "Cafe Au Lait",
+    // Repeats
     // "Black",
     // "Flat White",
     // "Latte",
@@ -60,7 +47,7 @@ const DrinksPage = () => {
       <div className="wrapper col-start-2 col-span-2 p-4">
         <div className="shadow"></div>
         <div className="title capitalize">
-          {selectedDrink.replace("-", " ")}
+          {selectedDrink.replace(/-/g, " ")}
         </div>
         <div className={`cup ${selectedDrink}`}>
           <div className="contents">
