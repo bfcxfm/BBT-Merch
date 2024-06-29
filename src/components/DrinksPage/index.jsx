@@ -7,7 +7,7 @@ const formatOption = (option) => {
 };
 
 const DrinksPage = () => {
-  const [selectedDrink, setSelectedDrink] = useState("black");
+  const [selectedDrink, setSelectedDrink] = useState("milk-tea");
 
   const drinkOptions = [
     "Tea",
