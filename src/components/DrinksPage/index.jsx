@@ -1,6 +1,14 @@
 import { useState } from "react";
 // import "./drinks.css";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 // Utility function to format the drink type
 const formatOption = (option) => {
   return option.toLowerCase().replace(/\s/g, "-");
@@ -43,8 +51,8 @@ const DrinksPage = () => {
   ];
 
   return (
-    <div className="drinks-page grid grid-cols-4 gap-4">
-      <div className="wrapper col-start-1 col-span-2 p-4">
+    <div className="drinks-page grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="wrapper col-span-1 lg:col-start-2 p-4">
         <div className="shadow"></div>
         <div className="title capitalize">
           {selectedDrink.replace(/-/g, " ")}
@@ -71,7 +79,7 @@ const DrinksPage = () => {
         </div>
       </div>
 
-      <div className="options col-start-3 col-span-1 p-4 overflow-auto">
+      <div className="options col-span-1 lg:col-start-3 p-4 overflow-auto">
         {drinkOptions.map((option, index) => (
           <div
             key={index}

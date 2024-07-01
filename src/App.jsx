@@ -14,12 +14,12 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="grid grid-rows-5 grid-cols-5 gap-4">
+    <div className="grid grid-rows-3 grid-cols-4 gap-4">
       <Routes>
         <Route
           path="/admin"
           element={
-            <div className="col-span-5">
+            <div className="col-span-4">
               <TooltipProvider>
                 <Dashboard />
               </TooltipProvider>
@@ -29,7 +29,7 @@ function App() {
         <Route
           path="/user"
           element={
-            <div className="col-span-5">
+            <div className="col-span-4">
               <TooltipProvider>
                 <OrderPage />
               </TooltipProvider>
@@ -40,13 +40,13 @@ function App() {
           path="/"
           element={
             <>
-              <div className="row-start-1 col-span-2">
+              <div className="row-start-1 col-start-1 col-span-2">
                 <LoginForm />
               </div>
               <div className="row-start-1 col-start-3 col-span-2">
                 <SignUpForm />
               </div>
-              <div className="row-start-2 col-span-5">
+              <div className="row-start-2 col-span-4">
                 <DrinksPage />
               </div>
             </>
