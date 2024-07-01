@@ -43,8 +43,8 @@ const DrinksPage = () => {
   ];
 
   return (
-    <div className="drinks-page grid grid-cols-5 gap-4">
-      <div className="wrapper col-start-2 col-span-2 p-4">
+    <div className="drinks-page grid grid-cols-4 gap-4">
+      <div className="wrapper col-start-1 col-span-2 p-4">
         <div className="shadow"></div>
         <div className="title capitalize">
           {selectedDrink.replace(/-/g, " ")}
@@ -71,14 +71,16 @@ const DrinksPage = () => {
         </div>
       </div>
 
-      <div className="options col-start-5 col-span-1 p-4 overflow-auto">
+      <div className="options col-start-3 col-span-1 p-4 overflow-auto">
         {drinkOptions.map((option, index) => (
           <div
             key={index}
             onClick={() => {
               setSelectedDrink(formatOption(option));
             }}
-            className="cursor-pointer py-2"
+            className={`cursor-pointer py-2 ${
+              formatOption(option) === selectedDrink ? "selected" : ""
+            }`}
           >
             {option}
           </div>
