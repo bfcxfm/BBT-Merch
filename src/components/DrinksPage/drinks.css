@@ -17,20 +17,8 @@
     /* font-family: Poppins; */
     background: #1e1e1e;
   }
-  @media screen and (max-height: 500px) {
-    body > * {
-      scale: 0.8;
-    }
-  }
-  @media screen and (max-height: 430px) {
-    body > * {
-      scale: 0.7;
-    }
-    .options {
-      translate: 259px 2px !important;
-    }
-  }
-  .options {
+
+  .options-tea {
     position: relative;
     width: 250px;
     height: 485px;
@@ -41,28 +29,30 @@
     overflow-y: scroll; /* Enable scrolling */
     /* backdrop-filter: blur(10px);  */
     /* border-radius: 8px; */
+    border-right: 1px solid #ccc;
+
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    padding-top: 10px; /* Add padding to avoid options touching the edges */
+    padding-top: 10px; /* Add padding to avoid options-tea touching the edges */
   }
 
   /* Hide scrollbar for Webkit-based browsers (Chrome, Safari) */
-  .options::-webkit-scrollbar {
+  .options-tea::-webkit-scrollbar {
     width: 0;
     height: 0;
   }
 
   /* Hide scrollbar for Firefox */
-  .options {
+  .options-tea {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
   }
 
-  /* Style for the individual options */
-  .options > div {
+  /* Style for the individual options-tea */
+  .options-tea > div {
     width: 90%; /* Add some padding on the sides */
-    margin-bottom: 10px; /* Space between options */
+    margin-bottom: 10px; /* Space between options-tea */
     padding: 12px;
-    text-align: left;
+    text-align: center;
     font-size: 16px;
     transition: all 0.3s ease; /* Smooth transition for hover effects */
 
@@ -70,20 +60,115 @@
     border-radius: 0px; /* Rounded corners for a modern touch */
   }
 
-  .options > div:hover {
+  .options-tea > div:hover {
     cursor: pointer;
     color: rgb(0, 0, 0);
     transform: scale(1.05);
   }
 
   /* Style for the selected option */
-  .options .selected {
-    background: rgba(255, 255, 255, 0.3); /* Highlight selected option */
+  .options-tea .selected {
+    /* background: rgba(255, 255, 255, 0.3);  */
     color: #000000; /* White color for selected text */
     text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3); /* Add 45-degree text shadow */
   }
 
-  .wrapper {
+  .options-coffee {
+    position: relative;
+    width: 250px;
+    height: 485px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Semi-transparent dark background */
+    overflow-y: scroll; /* Enable scrolling */
+    /* backdrop-filter: blur(10px);  */
+    /* border-radius: 8px; */
+    border-left: 1px solid #ccc; /* Add a light grey border */
+
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    padding-top: 10px; /* Add padding to avoid options-coffee touching the edges */
+  }
+
+  /* Hide scrollbar for Webkit-based browsers (Chrome, Safari) */
+  .options-coffee::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  /* Hide scrollbar for Firefox */
+  .options-coffee {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+
+  /* Style for the individual options-coffee */
+  .options-coffee > div {
+    width: 90%; /* Add some padding on the sides */
+    margin-bottom: 10px; /* Space between options-coffee */
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+
+    color: grey; /* Light text color */
+    border-radius: 0px; /* Rounded corners for a modern touch */
+  }
+
+  .options-coffee > div:hover {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    transform: scale(1.05);
+  }
+
+  /* Style for the selected option */
+  .options-coffee .selected {
+    /* background: rgba(255, 255, 255, 0.3);  */
+    color: #000000; /* White color for selected text */
+    text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3); /* Add 45-degree text shadow */
+  }
+
+  .wrapper-tea {
+    position: relative;
+    width: 300px;
+    height: 485px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #fdfbf7, #fdfbf7);
+    /* box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15); */
+    border-radius: 15px;
+    transform: translateY(-5px);
+    perspective: 1000px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .wrapper-tea::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: rgba(128, 128, 128, 0.1); /* semi-transparent grey */
+    border-radius: 50%;
+    z-index: -1; /* Ensure it is behind the wrapper */
+    backdrop-filter: blur(10px); /* Apply glass effect */
+    -webkit-backdrop-filter: blur(10px); /* For WebKit browsers */
+  }
+
+  .wrapper-tea:hover {
+    transform: rotateX(15deg) rotateY(15deg);
+    box-shadow: 0 0 10px rgba(255, 204, 153, 0.8),
+      /* Warm cream color closer to the object */ 0 0 20px
+        rgba(255, 178, 102, 0.6),
+      /* Soft orange light */ 0 0 40px rgba(204, 102, 51, 0.4),
+      /* Warmer, deeper orange */ 0 0 80px rgba(153, 76, 0, 0.2),
+      /* Darker brown-orange */ 0 0 160px rgba(102, 51, 0, 0.1); /* Very diffused, almost brown */
+  }
+
+  .wrapper-coffee {
     position: relative;
     width: 300px;
     height: 485px;
@@ -101,7 +186,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .wrapper::before {
+  .wrapper-coffee::before {
     content: "";
     position: absolute;
     width: 280px;
@@ -113,7 +198,7 @@
     -webkit-backdrop-filter: blur(10px); /* For WebKit browsers */
   }
 
-  .wrapper:hover {
+  .wrapper-coffee:hover {
     transform: rotateX(15deg) rotateY(15deg);
     box-shadow: 0 0 10px rgba(255, 204, 153, 0.8),
       /* Warm cream color closer to the object */ 0 0 20px

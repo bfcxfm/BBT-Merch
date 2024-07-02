@@ -1,5 +1,6 @@
 #root {
-  display: flex;
+  /* display: flex; */
+  /* justify-content: center; */
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -40,4 +41,12 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.tea-bg {
+  background: #fdfbf7;
+}
+
+.coffee-bg {
+  background: #f9f6f0;
 }

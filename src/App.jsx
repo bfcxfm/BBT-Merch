@@ -7,52 +7,75 @@ import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
 import Dashboard from "./components/AdminPage";
 import { TooltipProvider } from "./components/ui/tooltip";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import OrderPage from "./components/OrderPage";
+import NavBar from "./components/NavBar";
 
 function App() {
   const [count, setCount] = useState(0);
+  const location = useLocation();
+  const isRootPath = location.pathname === "/";
+  const [user, setUser] = useState(null);
 
   return (
-    <div className="grid grid-rows-3 grid-cols-4 gap-4">
-      <Routes>
-        <Route
-          path="/admin"
-          element={
-            <div className="col-span-4">
-              <TooltipProvider>
-                <Dashboard />
-              </TooltipProvider>
-            </div>
-          }
-        />
-        <Route
-          path="/user"
-          element={
-            <div className="col-span-4">
-              <TooltipProvider>
-                <OrderPage />
-              </TooltipProvider>
-            </div>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <>
-              <div className="row-start-1 col-start-1 col-span-2">
-                <LoginForm />
+    <div className="flex flex-col">
+      {isRootPath && <NavBar />} {/* Always include NavBar at the top */}
+      <div className="flex flex-1 flex-col">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="grid  grid-cols-4 gap-4">
+                <div className="mt-4 col-span-4">
+                  <DrinksPage />
+                </div>
               </div>
-              <div className="row-start-1 col-start-3 col-span-2">
-                <SignUpForm />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <div className="grid  grid-cols-4 gap-4">
+                <div className="mt-4 col-span-4">
+                  <LoginForm />
+                </div>
               </div>
-              <div className="row-start-2 col-span-4">
-                <DrinksPage />
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <div className="grid  grid-cols-4 gap-4">
+                <div className="mt-4 col-span-4">
+                  <SignUpForm />
+                </div>
               </div>
-            </>
-          }
-        />
-      </Routes>
+            }
+          />
+        </Routes>
+        <Routes>
+          <Route
+            path="/admin"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                  <Dashboard />
+                </TooltipProvider>
+              </div>
+            }
+          />
+          <Route
+            path="/user"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                  <OrderPage />
+                </TooltipProvider>
+              </div>
+            }
+          />
+        </Routes>
+      </div>
     </div>
   );
 }
