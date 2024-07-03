@@ -18,6 +18,7 @@ import {
   checkPermission,
 } from "/service/users";
 import { hashDataWithSaltRounds, storeToken } from "/util/security";
+import { useState } from "react";
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({});
@@ -41,16 +42,18 @@ export default function LoginForm() {
       console.log(formData);
       // get user salt and iterations from database
       const loginDetails = await getLoginDetails(formData.email);
-      console.log(loginDetails);
+      console.log(loginDetails.data.salt);
       const hashedPassword = hashDataWithSaltRounds(
         formData.password,
-        loginDetails.salt,
-        loginDetails.iterations
+        loginDetails.data.salt,
+        loginDetails.data.iterations
       );
+      console.log(hashedPassword);
       formData.password = hashedPassword;
       console.log(formData);
       const token = await loginUser(formData);
       // store token in localStorage
+      console.log(token);
       storeToken(token);
       // Baby step!
     } catch (e) {
@@ -74,33 +77,42 @@ export default function LoginForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="m@example.com"
+                onChange={handleChange}
+                required
+              />
             </div>
-            <Input
-              id="password"
-              type="password"
-              name="password"
-              onChange={handleChange}
-              required
-            />
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+              </div>
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+            {/* <button type="submit" onClick={handleCheckLogin}>
+              Check Login
+            </button>
+            <button type="submit" onClick={handleCheckPermission}>
+              Check Permissions
+            </button> */}
           </div>
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-        </div>
+        </form>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
           <Link to="/signup" className="underline">
