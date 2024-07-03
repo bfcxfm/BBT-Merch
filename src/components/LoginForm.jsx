@@ -39,21 +39,21 @@ export default function LoginForm() {
       delete formData.error;
       delete formData.confirm;
       // highlight-end
-      console.log(formData);
+      // console.log(formData);
       // get user salt and iterations from database
       const loginDetails = await getLoginDetails(formData.email);
-      console.log(loginDetails.data.salt);
+      // console.log(loginDetails.data.salt);
       const hashedPassword = hashDataWithSaltRounds(
         formData.password,
         loginDetails.data.salt,
         loginDetails.data.iterations
       );
-      console.log(hashedPassword);
+      // console.log(hashedPassword);
       formData.password = hashedPassword;
-      console.log(formData);
+      // console.log(formData);
       const token = await loginUser(formData);
       // store token in localStorage
-      console.log(token);
+      // console.log(token);
       storeToken(token);
       // Baby step!
     } catch (e) {

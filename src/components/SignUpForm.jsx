@@ -20,7 +20,7 @@ export default function SignUpForm() {
 
   function handleChange(evt) {
     var currForm = formState;
-    console.log(currForm);
+    // console.log(currForm);
     currForm[evt.target.name] = evt.target.value;
     setDisable(checkPassword());
     setFormState(currForm);
@@ -46,10 +46,10 @@ export default function SignUpForm() {
   function hashPassword() {
     var currForm = formState;
     if (currForm.password) {
-      console.log(currForm);
+      // console.log(currForm);
       
       var hash = hashData(currForm.password);
-      console.log(hash);
+      // console.log(hash);
       currForm.password = hash.hash;
       currForm.salt = hash.salt;
       currForm.iterations = hash.iterations;
@@ -67,10 +67,10 @@ export default function SignUpForm() {
       delete formData.error;
       delete formData.confirm;
       // highlight-end
-      console.log(formData);
+      // console.log(formData);
       const user = await signUp(formData);
       // Baby step!
-      console.log(user);
+      // console.log(user);
     } catch (e) {
       console.log(e);
     }
