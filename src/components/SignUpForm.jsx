@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,15 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signUp } from "../../service/users";
+import { getUser, signUp } from "../../service/users";
 import { hashData } from "../../util/security";
 
 export default function SignUpForm() {
   const [formState, setFormState] = useState({});
   const [disable, setDisable] = useState(true);
+
+  const [user, setUser] = useState(getUser);
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     var currForm = formState;
@@ -71,12 +74,20 @@ export default function SignUpForm() {
       const user = await signUp(formData);
       // Baby step!
       // console.log(user);
+      // Navigate to the home page if sign up was successful
+    if (user.success) {
+      navigate("/");
+    }
     } catch (e) {
       console.log(e);
     }
   }
 
   return (
+    <>
+    {user ? (
+      <Navigate to="/" />
+    ) : (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
@@ -141,6 +152,7 @@ export default function SignUpForm() {
           </div>
         </form>
       </CardContent>
-    </Card>
+    </Card> )}
+    </>
   );
 }

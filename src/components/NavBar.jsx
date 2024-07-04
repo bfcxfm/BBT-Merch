@@ -77,8 +77,23 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { getUser, logoutUser } from "../../service/users";
+import { useState } from "react";
 
 export default function NavBar() {
+  const [user, setUser] = useState(getUser);
+
+  // console.log(user);
+
+  const handleLogout = () => {
+    logoutUser().then(() => {
+      setUser(getUser()); // Update state after logout is complete
+    }).catch((error) => {
+      console.error("Logout failed", error);
+    });
+  };
+
+
   return (
     <div className="w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -189,10 +204,12 @@ export default function NavBar() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link to="/login" relative="path">
+              <DropdownMenuItem> {user? ( <Link to="/" onClick={handleLogout}>
+          Logout
+        </Link>): 
+                (<Link to="/login" relative="path">
                   Login
-                </Link>
+                </Link>) }
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
