@@ -151,7 +151,7 @@ const DrinksPage = () => {
           ))}
         </div>
 
-        <div className="wrapper-coffee col-span-1 order-first sm:order-last sm:col-start-2 lg:col-start-4 ">
+        <div className="wrapper-coffee col-span-1 order-first sm:order-last sm:col-start-2 lg:col-start-4 mx-auto">
           <div className="shadow"></div>
           <div className="title capitalize">
             {selectedCoffeeDrink.replace(/-/g, " ")}
