@@ -45,8 +45,11 @@
 
 .tea-bg {
   background: #fdfbf7;
+  /* background: linear-gradient(180deg, #fdfbf7, #f9f6f0); */
 }
 
 .coffee-bg {
   background: #f9f6f0;
+
+  /* background: linear-gradient(180deg,#f9f6f0, #fdfbf7); */
 }

@@ -76,7 +76,7 @@ export default function SignUpForm() {
       // console.log(user);
       // Navigate to the home page if sign up was successful
     if (user.success) {
-      navigate("/");
+      navigate("/login");
     }
     } catch (e) {
       console.log(e);
