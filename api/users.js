@@ -149,3 +149,20 @@ export async function checkPermission(token) {
     throw new Error("Invalid Login");
   }
 }
+
+
+
+export async function updateUserDetails(token, userId, userData) {
+  const response = await fetch(`${BASE_URL}/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to update user details');
+  }
+  return await response.json();
+}

@@ -6,6 +6,7 @@ import DrinksPage from "./components/DrinksPage";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
 import Dashboard from "./components/AdminPage";
+import EditUserForm from "./components/EditUserForm";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { Route, Routes, useLocation } from "react-router-dom";
 import OrderPage from "./components/OrderPage";
