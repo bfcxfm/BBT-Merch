@@ -8,8 +8,8 @@ import SignUpForm from "./components/SignUpForm";
 import Dashboard from "./components/AdminPage";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { Route, Routes, useLocation } from "react-router-dom";
-import OrderPage from "./components/OrderPage";
 import NavBar from "./components/NavBar";
+import UserPage from "./components/UserPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -69,7 +69,7 @@ function App() {
             element={
               <div className="col-span-4">
                 <TooltipProvider>
-                  <OrderPage />
+                  <UserPage />
                 </TooltipProvider>
               </div>
             }
