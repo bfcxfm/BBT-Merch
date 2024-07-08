@@ -89,7 +89,7 @@ export default function SignUpForm() {
       <Navigate to="/" />
     ) : (
     <Card className="mx-auto max-w-sm">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}></form>
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
         <CardDescription>
