@@ -103,7 +103,7 @@ export default function NavBar() {
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
             <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">BBT</span>
           </Link>
           <Link
             href="#"
@@ -111,12 +111,13 @@ export default function NavBar() {
           >
             Menu
           </Link>
+          {user &&
           <Link
-            href="#"
+            to="/user" relative="path"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Orders
-          </Link>
+          </Link>}
           <Link
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
@@ -148,17 +149,18 @@ export default function NavBar() {
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only">BBT</span>
               </Link>
               <Link href="#" className="hover:text-foreground">
                 Menu
               </Link>
+              {user &&
               <Link
-                href="#"
+                to="/user" relative="path"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Orders
-              </Link>
+              </Link>}
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"

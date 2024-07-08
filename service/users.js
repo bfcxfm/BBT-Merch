@@ -62,3 +62,13 @@ export async function checkPermission() {
   // Baby step by returning whatever is sent back by the server
   return res;
 }
+export async function getOrderDetails(){
+  const token = getToken();
+  // Delegate the network request code to the users-api.js API module
+  // which will ultimately return a JSON Web Token (JWT)
+  const res = await usersAPI.getOrderDetails(token);
+  // Baby step by returning whatever is sent back by the server
+  console.log("service", res);
+  return res;
+
+}

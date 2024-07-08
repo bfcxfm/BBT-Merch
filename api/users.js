@@ -149,3 +149,26 @@ export async function checkPermission(token) {
     throw new Error("Invalid Login");
   }
 }
+
+export async function getOrderDetails(token) {
+  // Define the URL for fetching order details
+  const orderURL = BASE_URL + "/order";
+  console.log(orderURL);
+
+  // Perform the fetch request
+  const res = await fetch(orderURL, {
+    method: "GET",
+    headers: { 
+      "Content-Type": "application/json", 
+      "Authorization": token 
+    }
+  });
+
+  // Check if request was successful
+  if (res.ok) {
+    console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error fetching order details");
+  }
+}

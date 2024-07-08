@@ -77,8 +77,38 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useEffect, useState } from "react";
+import { getOrderDetails } from "../../service/users";
 
 export default function UserPage() {
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [orders, setOrders] = useState([]);
+
+  console.log(selectedOrder);
+
+  const handleOrderSelect = (order) => {
+    setSelectedOrder(order);
+    console.log(selectedOrder);
+  };
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  useEffect(() => {
+    async function fetchOrders() {
+      const orderData = await getOrderDetails();
+      setOrders(orderData.data);
+      console.log(orders);
+      if (orderData.data && orderData.data.length > 0) {
+        setSelectedOrder(orderData.data[0]);
+      }
+    }
+    fetchOrders();
+  }, []);
+
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -283,7 +313,30 @@ export default function UserPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
+                {orders.map((order, index) => (
+            <TableRow key={index} onClick={() => handleOrderSelect(order)}>
+              <TableCell>
+              <div className="font-medium">{order.orderID}</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                      {order.status}
+                      </div>
+              </TableCell>
+              <TableCell className="hidden xl:table-column">
+                      Sale
+                    </TableCell>
+                    <TableCell className="hidden xl:table-column">
+                      <Badge className="text-xs" variant="outline">
+                        Approved
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
+                      2023-06-23
+                    </TableCell>
+              <TableCell className="text-right">${order.total.toFixed(2)}</TableCell>
+            </TableRow>
+          ))}
+
+                  {/* <TableRow>
                     <TableCell>
                       <div className="font-medium">Liam Johnson</div>
                       <div className="hidden text-sm text-muted-foreground md:inline">
@@ -382,16 +435,17 @@ export default function UserPage() {
                       2023-06-27
                     </TableCell>
                     <TableCell className="text-right">$550.00</TableCell>
-                  </TableRow>
+                  </TableRow> */}
                 </TableBody>
               </Table>
             </CardContent>
           </Card>
+          {selectedOrder && (
           <Card x-chunk="dashboard-01-chunk-5">
             <CardHeader className="flex flex-row items-start bg-muted/50">
               <div className="grid gap-0.5">
                 <CardTitle className="group flex items-center gap-2 text-lg">
-                  Order Oe31b70H
+                  Order {selectedOrder && selectedOrder.orderID}
                   <Button
                     size="icon"
                     variant="outline"
@@ -401,7 +455,7 @@ export default function UserPage() {
                     <span className="sr-only">Copy Order ID</span>
                   </Button>
                 </CardTitle>
-                <CardDescription>Date: November 23, 2023</CardDescription>
+                <CardDescription>Date: {formatDate(selectedOrder.createdAt)}</CardDescription>
               </div>
               <div className="ml-auto flex items-center gap-1">
                 <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -426,44 +480,84 @@ export default function UserPage() {
                 </DropdownMenu>
               </div>
             </CardHeader>
+            
             <CardContent className="p-6 text-sm">
               <div className="grid gap-3">
                 <div className="font-semibold">Order Details</div>
                 <ul className="grid gap-3">
-                  <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">
-                      Glimmer Lamps x <span>2</span>
-                    </span>
-                    <span>$250.00</span>
-                  </li>
-                  <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">
-                      Aqua Filters x <span>1</span>
-                    </span>
-                    <span>$49.00</span>
-                  </li>
+                {selectedOrder.drinks.map((drink, index) => (
+                    <li className="flex flex-col gap-1" key={index}>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">
+                          {drink.mainProduct.name} x <span>{drink.quantity}</span>
+                        </span>
+                        <span>${drink.mainProduct.price.toFixed(2)}</span>
+                      </div>
+                      {drink.toppings && drink.toppings.map((topping, tIndex) => (
+                        <div className="flex items-center justify-between pl-4" key={tIndex}>
+                          <span className="text-muted-foreground">
+                            {topping.topping.name} x <span>{topping.quantity}</span>
+                          </span>
+                          <span>${(topping.topping.price * topping.quantity).toFixed(2)}</span>
+                        </div>
+                      ))}
+                      {drink.comment && drink.comment.map((comment, cIndex) => (
+                    <div key={cIndex} className="flex flex-col gap-1 mt-2 pl-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Sugar</span>
+                        <span>{comment.sugar}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Sugar Level</span>
+                        <span>{comment.sugarLevel}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Ice Level</span>
+                        <span>{comment.iceLevel}</span>
+                      </div>
+                      {/* <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Rating</span>
+                        <span>{comment.rating} / 5</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Created At</span>
+                        <span>{formatDate(comment.createdAt)}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Updated At</span>
+                        <span>{formatDate(comment.updatedAt)}</span>
+                      </div> */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Comment</span>
+                        <span>{comment.content}</span>
+                      </div>
+                    </div>
+                ))}
+                    </li>
+                  ))}
+                  
                 </ul>
                 <Separator className="my-2" />
                 <ul className="grid gap-3">
                   <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span>$299.00</span>
+                    <span>${selectedOrder.total.toFixed(2)}</span>
                   </li>
                   <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Shipping</span>
-                    <span>$5.00</span>
+                    <span>$0.00</span>
                   </li>
-                  <li className="flex items-center justify-between">
+                  {/* <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Tax</span>
                     <span>$25.00</span>
-                  </li>
+                  </li> */}
                   <li className="flex items-center justify-between font-semibold">
                     <span className="text-muted-foreground">Total</span>
-                    <span>$329.00</span>
+                    <span>${selectedOrder.total.toFixed(2)}</span>
                   </li>
                 </ul>
               </div>
-              <Separator className="my-4" />
+              {/* <Separator className="my-4" />
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-3">
                   <div className="font-semibold">Shipping Information</div>
@@ -479,8 +573,8 @@ export default function UserPage() {
                     Same as shipping address
                   </div>
                 </div>
-              </div>
-              <Separator className="my-4" />
+              </div> */}
+              {/* <Separator className="my-4" />
               <div className="grid gap-3">
                 <div className="font-semibold">Customer Information</div>
                 <dl className="grid gap-3">
@@ -501,7 +595,7 @@ export default function UserPage() {
                     </dd>
                   </div>
                 </dl>
-              </div>
+              </div> */}
               <Separator className="my-4" />
               <div className="grid gap-3">
                 <div className="font-semibold">Payment Information</div>
@@ -518,7 +612,7 @@ export default function UserPage() {
             </CardContent>
             <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
               <div className="text-xs text-muted-foreground">
-                Updated <time dateTime="2023-11-23">November 23, 2023</time>
+                Updated <time dateTime="2023-11-23">{formatDate(selectedOrder.updatedAt)}</time>
               </div>
               <Pagination className="ml-auto mr-0 w-auto">
                 <PaginationContent>
@@ -538,6 +632,7 @@ export default function UserPage() {
               </Pagination>
             </CardFooter>
           </Card>
+          )}
         </div>
       </main>
     </div>
