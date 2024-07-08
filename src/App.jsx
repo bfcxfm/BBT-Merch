@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Button } from "@/components/ui/button";
 import { EnvelopeOpenIcon } from "@radix-ui/react-icons";
@@ -10,12 +10,16 @@ import { TooltipProvider } from "./components/ui/tooltip";
 import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import UserPage from "./components/UserPage";
+import { getUser } from "../service/users";
 
 function App() {
-  const [count, setCount] = useState(0);
   const location = useLocation();
   const isRootPath = location.pathname === "/";
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getUser);
+  // useEffect(() => {
+  //   const fetchedUser = getUser(); // You can replace this with an API call if needed
+  //   setUser(fetchedUser);
+  // }, []);
 
   return (
     <div className="flex flex-col">
@@ -63,7 +67,7 @@ function App() {
                 </TooltipProvider>
               </div>
             }
-          />
+          /> 
           <Route
             path="/user"
             element={

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
 import {
   Activity,
@@ -78,13 +78,28 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useEffect, useState } from "react";
-import { getOrderDetails } from "../../service/users";
+import { getOrderDetails, getUser, logoutUser } from "../../service/users";
 
 export default function UserPage() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [orders, setOrders] = useState([]);
 
   console.log(selectedOrder);
+
+  const [user, setUser] = useState(getUser);
+  const navigate = useNavigate();
+  
+
+  // console.log(user);
+
+  const handleLogout = () => {
+    logoutUser().then(() => {
+      setUser(getUser()); // Update state after logout is complete
+      navigate('/');
+    }).catch((error) => {
+      console.error("Logout failed", error);
+    });
+  };
 
   const handleOrderSelect = (order) => {
     setSelectedOrder(order);
@@ -99,7 +114,7 @@ export default function UserPage() {
   useEffect(() => {
     async function fetchOrders() {
       const orderData = await getOrderDetails();
-      setOrders(orderData.data);
+      setOrders(orderData.data.reverse());
       console.log(orders);
       if (orderData.data && orderData.data.length > 0) {
         setSelectedOrder(orderData.data[0]);
@@ -114,11 +129,11 @@ export default function UserPage() {
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link
-            href="#"
+            to="/"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
             <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">BBT</span>
           </Link>
           <Link
             href="#"
@@ -159,11 +174,11 @@ export default function UserPage() {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <Link
-                href="#"
+                to="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only">BBT</span>
               </Link>
               <Link href="#" className="hover:text-foreground">
                 Dashboard
@@ -172,7 +187,7 @@ export default function UserPage() {
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Orders
+                Payment
               </Link>
               <Link
                 href="#"
@@ -184,14 +199,9 @@ export default function UserPage() {
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Customers
+                Settings
               </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Analytics
-              </Link>
+              
             </nav>
           </SheetContent>
         </Sheet>
@@ -219,7 +229,12 @@ export default function UserPage() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>{user? ( <button onClick={handleLogout}>
+          Logout
+        </button>): 
+                (<Link to="/login" relative="path">
+                  Login
+                </Link>) }</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

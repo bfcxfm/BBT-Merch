@@ -78,12 +78,17 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { getUser, logoutUser } from "../../service/users";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
   const [user, setUser] = useState(getUser);
 
   // console.log(user);
+
+  // useEffect(() => {
+  //   const fetchedUser = getUser(); // You can replace this with an API call if needed
+  //   setUser(fetchedUser);
+  // }, []);
 
   const handleLogout = () => {
     logoutUser().then(() => {
