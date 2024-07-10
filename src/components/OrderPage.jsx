@@ -16,7 +16,7 @@ import { Checkbox } from "./ui/checkbox"
 import { Button } from "./ui/button"
 import { useNavigate } from "react-router-dom"
 
-export default function OrderPage({ selectedTea, selectedCoffee, addToCart }) {
+export default function OrderPage({ selectedTea, selectedCoffee, addToCart, isDialogOpen, setIsDialogOpen, isCartOpen, setIsCartOpen }) {
 
   // console.log(selectedCoffee);
   // console.log(mainProduct);
@@ -170,6 +170,8 @@ export default function OrderPage({ selectedTea, selectedCoffee, addToCart }) {
     console.log(drinkToAdd);
     addToCart(drinkToAdd);
     resetDrink();
+    setIsDialogOpen(false);
+    // setIsCartOpen(true);
     // navigate('/cart'); 
   };
 

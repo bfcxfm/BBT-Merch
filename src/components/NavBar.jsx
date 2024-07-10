@@ -81,7 +81,7 @@ import { getUser, logoutUser } from "../../service/users";
 import { useEffect, useState } from "react";
 import CartPage from "./CartPage";
 
-export default function NavBar({cartItems, updateCartItem, removeFromCart, addToCart}) {
+export default function NavBar({cartItems, updateCartItem, removeFromCart, addToCart, isCartOpen, setIsCartOpen, setCartItems }) {
 
   const [user, setUser] = useState(getUser);
 
@@ -140,11 +140,11 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
 
           
 
-          <Sheet>
+          <Sheet open={isCartOpen} onOpenChange={setIsCartOpen} >
       <SheetTrigger asChild>
         <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="overflow-auto">
         <SheetHeader>
           <SheetTitle>View Cart</SheetTitle>
           <SheetDescription>
@@ -154,7 +154,8 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
         <CartPage cartItems={cartItems}
                 updateCartItem={updateCartItem}
                 removeFromCart={removeFromCart}
-                addToCart={addToCart}/>
+                addToCart={addToCart}
+                isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} setCartItems={setCartItems}/>
         
       </SheetContent>
     </Sheet>

@@ -31,7 +31,7 @@ const formatOption = (option) => {
   return option.toLowerCase().replace(/\s/g, "-");
 };
 
-const DrinksPage = ({addToCart}) => {
+const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
   const [selectedTeaDrink, setSelectedTeaDrink] = useState("milk-tea");
   const [selectedCoffeeDrink, setSelectedCoffeeDrink] = useState("latte");
   // const [selectedDrink, setSelectedDrink] = useState("milk-tea");
@@ -137,7 +137,7 @@ const DrinksPage = ({addToCart}) => {
           </div>
         </div>
         <div className="col-span-1 sm:order-first sm:col-start-1 sm:-mb-10 lg:order-first lg:col-start-1 mx-auto ">
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline"><CirclePlus className="w-5 h-5 mr-2" /> Select Option</Button>
       </DialogTrigger>
@@ -154,7 +154,7 @@ const DrinksPage = ({addToCart}) => {
           .split(" ")
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")}
-          addToCart={addToCart}/>
+          addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} />
         
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
@@ -204,7 +204,7 @@ const DrinksPage = ({addToCart}) => {
         </div>
 
         <div className="col-span-1 sm:col-start-2 sm:-mt-10 lg:col-start-6 lg:mr-20 pt-8 mx-auto ">
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Select Option<CirclePlus className="w-5 h-5 ml-2" /></Button>
       </DialogTrigger>
@@ -219,7 +219,7 @@ const DrinksPage = ({addToCart}) => {
           .split(" ")
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")}
-          addToCart={addToCart}/>
+          addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen}/>
         
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>

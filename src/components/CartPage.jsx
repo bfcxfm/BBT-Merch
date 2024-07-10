@@ -38,10 +38,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { placeOrder } from '../../service/users';
+import { getUser, placeOrder } from '../../service/users';
+import { Link } from 'react-router-dom';
 
-export default function CartPage({ cartItems, updateCartItem, removeFromCart }) {
+export default function CartPage({ cartItems, updateCartItem, removeFromCart, isCartOpen, setIsCartOpen, setCartItems}) {
   const [total, setTotal] = useState(0);
+  const [user, setUser] = useState(getUser);
 
   useEffect(() => {
     const newTotal = cartItems.reduce((sum, item) => sum + item.totalPrice * item.quantity, 0);
@@ -72,7 +74,8 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart }) 
     try {
       const response = await placeOrder(transformedOrder);
       console.log('Order placed:', response);
-      // You can add more logic here, like navigating to a success page or showing a success message
+      setIsCartOpen(false);
+      setCartItems([]);
     } catch (error) {
       console.error('Error placing order:', error);
       // Handle errors appropriately, e.g., show an error message to the user
@@ -140,7 +143,11 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart }) 
             <span className="text-xl font-semibold">Total:</span>
             <span className="text-xl font-bold">${total.toFixed(2)}</span>
           </div>
-          <Button className="w-full mt-4" onClick={handlePlaceOrder}>Proceed to Checkout</Button>
+          {user? ( 
+                
+          <Button className="w-full mt-4" onClick={handlePlaceOrder}>Proceed to Checkout</Button>):(<Link to="/login" relative="path">
+            Login
+          </Link>) }
         </>
       )}
     </div>

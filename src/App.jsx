@@ -23,10 +23,15 @@ function App() {
   //   setUser(fetchedUser);
   // }, []);
 
+  const [isCartOpen, setIsCartOpen] = useState(false);  // State to control the cart sheet
+  const [isDialogOpen, setIsDialogOpen] = useState(false);  // State to control the dialog
+
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
+    setIsDialogOpen(false); // Close dialog after adding to cart
+    setIsCartOpen(true);    // Open cart sheet
   };
 
   const updateCartItem = (index, updatedItem) => {
@@ -39,13 +44,14 @@ function App() {
     const newCartItems = cartItems.filter((_, i) => i !== index);
     setCartItems(newCartItems);
   };
+  
 
   return (
     <div className="flex flex-col">
-      {isRootPath && <NavBar cartItems={cartItems}
+      {isRootPath && <NavBar isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} cartItems={cartItems}
                 updateCartItem={updateCartItem}
                 removeFromCart={removeFromCart}
-                addToCart={addToCart} />} {/* Always include NavBar at the top */}
+                addToCart={addToCart} setCartItems={setCartItems}/>} {/* Always include NavBar at the top */}
       <div className="flex flex-1 flex-col">
         <Routes>
           <Route
@@ -53,7 +59,7 @@ function App() {
             element={
               <div className="grid  grid-cols-4 gap-4">
                 <div className="mt-4 col-span-4">
-                  <DrinksPage addToCart={addToCart} />
+                  <DrinksPage addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen}/>
                 </div>
               </div>
             }
