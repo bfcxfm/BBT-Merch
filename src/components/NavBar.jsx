@@ -80,7 +80,7 @@ import {
 import { getUser, logoutUser } from "../../service/users";
 import { useEffect, useState } from "react";
 
-export default function NavBar() {
+export default function NavBar(cartItems) {
   const [user, setUser] = useState(getUser);
 
   // console.log(user);
@@ -135,6 +135,8 @@ export default function NavBar() {
           >
             Contact
           </Link>
+
+          <Link to="/cart" className="text-muted-foreground transition-colors hover:text-foreground">Cart {cartItems.length}</Link>
         </nav>
         <Sheet>
           <SheetTrigger asChild>

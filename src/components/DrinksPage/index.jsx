@@ -10,16 +10,21 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
+import OrderPage from "../OrderPage";
 
 // Utility function to format the drink type
 const formatOption = (option) => {
   return option.toLowerCase().replace(/\s/g, "-");
 };
 
-const DrinksPage = () => {
+const DrinksPage = ({addToCart}) => {
   const [selectedTeaDrink, setSelectedTeaDrink] = useState("milk-tea");
   const [selectedCoffeeDrink, setSelectedCoffeeDrink] = useState("latte");
   // const [selectedDrink, setSelectedDrink] = useState("milk-tea");
+
+  // const handleAddToCart = (item) => {
+  //   setCartItems([...cartItems, item]);
+  // };
 
   const teaOptions = [
     "TEA",
@@ -178,6 +183,19 @@ const DrinksPage = () => {
           </div>
         </div>
       </div>
+
+      <OrderPage 
+        selectedTea={selectedTeaDrink
+          .replace(/-/g, " ")
+          .split(" ")
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")}
+        selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
+          .split(" ")
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")}
+          addToCart={addToCart}
+      />
     </>
   );
 };

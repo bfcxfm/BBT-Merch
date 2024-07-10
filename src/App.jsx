@@ -11,6 +11,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import UserPage from "./components/UserPage";
 import { getUser } from "../service/users";
+import OrderPage from "./components/OrderPage";
+import CartPage from "./components/CartPage";
 
 function App() {
   const location = useLocation();
@@ -21,9 +23,26 @@ function App() {
   //   setUser(fetchedUser);
   // }, []);
 
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+  const updateCartItem = (index, updatedItem) => {
+    const newCartItems = [...cartItems];
+    newCartItems[index] = updatedItem;
+    setCartItems(newCartItems);
+  };
+
+  const removeFromCart = (index) => {
+    const newCartItems = cartItems.filter((_, i) => i !== index);
+    setCartItems(newCartItems);
+  };
+
   return (
     <div className="flex flex-col">
-      {isRootPath && <NavBar />} {/* Always include NavBar at the top */}
+      {isRootPath && <NavBar cartItems={cartItems} />} {/* Always include NavBar at the top */}
       <div className="flex flex-1 flex-col">
         <Routes>
           <Route
@@ -31,7 +50,7 @@ function App() {
             element={
               <div className="grid  grid-cols-4 gap-4">
                 <div className="mt-4 col-span-4">
-                  <DrinksPage />
+                  <DrinksPage addToCart={addToCart} />
                 </div>
               </div>
             }
@@ -56,8 +75,31 @@ function App() {
               </div>
             }
           />
-        </Routes>
-        <Routes>
+          <Route
+            path="/order"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                <OrderPage />
+                </TooltipProvider>
+              </div>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                <CartPage 
+                cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}
+              />
+                </TooltipProvider>
+              </div>
+            }
+          />
           <Route
             path="/admin"
             element={
