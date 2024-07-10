@@ -54,7 +54,7 @@ import {
 } from "@/components/ui/pagination";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -79,8 +79,10 @@ import {
 } from "@/components/ui/breadcrumb";
 import { getUser, logoutUser } from "../../service/users";
 import { useEffect, useState } from "react";
+import CartPage from "./CartPage";
 
-export default function NavBar(cartItems) {
+export default function NavBar({cartItems, updateCartItem, removeFromCart, addToCart}) {
+
   const [user, setUser] = useState(getUser);
 
   // console.log(user);
@@ -136,7 +138,28 @@ export default function NavBar(cartItems) {
             Contact
           </Link>
 
-          <Link to="/cart" className="text-muted-foreground transition-colors hover:text-foreground">Cart {cartItems.length}</Link>
+          
+
+          <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>View Cart</SheetTitle>
+          <SheetDescription>
+            Make changes to Cart. Checkout when you're done.
+          </SheetDescription>
+        </SheetHeader>
+        <CartPage cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}/>
+        
+      </SheetContent>
+    </Sheet>
+
+
         </nav>
         <Sheet>
           <SheetTrigger asChild>

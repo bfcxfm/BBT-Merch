@@ -175,7 +175,7 @@ export default function OrderPage({ selectedTea, selectedCoffee, addToCart }) {
 
   return (
     <div
-      className="relative hidden flex-col items-start gap-8 md:flex"
+      className="relative  flex-col items-start gap-8 md:flex"
     >
       <form className="grid w-full items-start gap-6">
         <fieldset className="grid gap-6 rounded-lg border p-4">
@@ -184,7 +184,7 @@ export default function OrderPage({ selectedTea, selectedCoffee, addToCart }) {
 
             <div className="grid gap-3">
               <Label>Toppings</Label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-5">
                 {TOPPINGS.map((topping) => (
                   <div key={topping.id} className="flex items-center space-x-2">
                     <Checkbox 
@@ -199,7 +199,7 @@ export default function OrderPage({ selectedTea, selectedCoffee, addToCart }) {
                         value={currentDrink.toppings.find(t => t.topping === topping.id).quantity}
                         onChange={(e) => updateToppingQuantity(topping.id, parseInt(e.target.value))}
                         min={1}
-                        className="w-16 ml-2"
+                        className="w-16 h-5 ml-2"
                       />
                     )}
                   </div>

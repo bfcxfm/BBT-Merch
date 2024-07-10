@@ -42,7 +42,10 @@ function App() {
 
   return (
     <div className="flex flex-col">
-      {isRootPath && <NavBar cartItems={cartItems} />} {/* Always include NavBar at the top */}
+      {isRootPath && <NavBar cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart} />} {/* Always include NavBar at the top */}
       <div className="flex flex-1 flex-col">
         <Routes>
           <Route
