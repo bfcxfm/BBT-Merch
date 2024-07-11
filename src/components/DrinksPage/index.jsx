@@ -154,6 +154,10 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
           .split(" ")
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")}
+          selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")}
           addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} />
         
         <DialogFooter className="sm:justify-start">
@@ -215,7 +219,12 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
             Customise your drink 
           </DialogDescription>
         </DialogHeader>
-        <OrderPage selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
+        <OrderPage selectedTea={selectedTeaDrink
+          .replace(/-/g, " ")
+          .split(" ")
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")}
+          selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
           .split(" ")
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")}

@@ -294,7 +294,7 @@ export default function UserPage() {
             </CardContent>
           </Card>
         </div> */}
-        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:mt-4 xl:grid-cols-3">
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
@@ -331,7 +331,7 @@ export default function UserPage() {
                 {orders.map((order, index) => (
             <TableRow key={index} onClick={() => handleOrderSelect(order)}>
               <TableCell>
-              <div className="font-medium">{order.orderID}</div>
+              <div className="font-medium ">{order.orderID}</div>
                       <div className="hidden text-sm text-muted-foreground md:inline">
                       {order.status}
                       </div>
@@ -341,11 +341,11 @@ export default function UserPage() {
                     </TableCell>
                     <TableCell className="hidden xl:table-column">
                       <Badge className="text-xs" variant="outline">
-                        Approved
+                      {order.status}
                       </Badge>
                     </TableCell>
                     <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-23
+                      {formatDate(order.createdAt)}
                     </TableCell>
               <TableCell className="text-right">${order.total.toFixed(2)}</TableCell>
             </TableRow>

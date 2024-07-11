@@ -140,25 +140,6 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
 
           
 
-          <Sheet open={isCartOpen} onOpenChange={setIsCartOpen} >
-      <SheetTrigger asChild>
-        <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
-      </SheetTrigger>
-      <SheetContent className="overflow-auto">
-        <SheetHeader>
-          <SheetTitle>View Cart</SheetTitle>
-          <SheetDescription>
-            Make changes to Cart. Checkout when you're done.
-          </SheetDescription>
-        </SheetHeader>
-        <CartPage cartItems={cartItems}
-                updateCartItem={updateCartItem}
-                removeFromCart={removeFromCart}
-                addToCart={addToCart}
-                isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} setCartItems={setCartItems}/>
-        
-      </SheetContent>
-    </Sheet>
 
 
         </nav>
@@ -198,12 +179,7 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
               >
                 Products
               </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Customers
-              </Link>
+              
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
@@ -214,6 +190,25 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
           </SheetContent>
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+        <Sheet open={isCartOpen} onOpenChange={setIsCartOpen} >
+      <SheetTrigger asChild>
+        <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
+      </SheetTrigger>
+      <SheetContent className="overflow-auto">
+        {/* <SheetHeader>
+          <SheetTitle>View Cart</SheetTitle>
+          <SheetDescription>
+            Make changes to Cart. Checkout when you're done.
+          </SheetDescription>
+        </SheetHeader> */}
+        <CartPage cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}
+                isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} setCartItems={setCartItems}/>
+        
+      </SheetContent>
+    </Sheet>
           <form className="ml-auto flex-1 sm:flex-initial">
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />

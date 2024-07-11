@@ -84,7 +84,7 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+      <h1 className="text-xl font-semibold mb-4">Your Cart</h1>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -94,10 +94,10 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
               <CardHeader>
                 <CardTitle>{item.mainProduct}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p>Toppings: {item.toppings.map(t => `${t.topping} (${t.quantity})`).join(', ')}</p>
+              <CardContent className="p-6 text-sm">
+                <div className="grid gap-3">
+                  <div className="text-muted-foreground">
+                    <p>Toppings: {item.toppings.map(t => `${t.topping} x ${t.quantity}`).join(', ')}</p>
                     <p>Sugar: {item.comment.sugar} ({item.comment.sugarLevel})</p>
                     <p>Ice: {item.comment.iceLevel}</p>
                     {item.comment.content && <p>Note: {item.comment.content}</p>}
@@ -145,9 +145,11 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
           </div>
           {user? ( 
                 
-          <Button className="w-full mt-4" onClick={handlePlaceOrder}>Proceed to Checkout</Button>):(<Link to="/login" relative="path">
-            Login
-          </Link>) }
+          <Button className="w-full mt-4" onClick={handlePlaceOrder}>Proceed to Checkout</Button>):(<Button className="w-full mt-4">
+            <Link to="/login" className="w-full h-full flex items-center justify-center">
+              Please Login to Checkout
+            </Link>
+          </Button>) }
         </>
       )}
     </div>
