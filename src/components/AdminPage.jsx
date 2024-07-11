@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { editUser, deleteUser, editOrder, deleteOrder } from '../../api/admin';
 
 import {
   Activity,
@@ -42,7 +44,31 @@ import {
 } from "@/components/ui/table";
 
 export default function Dashboard() {
+  const [userData, setUserData] = useState({});
+  const [orderData, setOrderData] = useState({});
+
+  const handleEditUser = async () => {
+    const response = await editUser(userData);
+    console.log(response);
+  };
+
+  const handleDeleteUser = async () => {
+    const response = await deleteUser(userData);
+    console.log(response);
+  };
+
+  const handleEditOrder = async () => {
+    const response = await editOrder(orderData);
+    console.log(response);
+  };
+
+  const handleDeleteOrder = async () => {
+    const response = await deleteOrder(orderData);
+    console.log(response);
+  };
   return (
+
+
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -252,6 +278,8 @@ export default function Dashboard() {
                       <div className="hidden text-sm text-muted-foreground md:inline">
                         liam@example.com
                       </div>
+                      <Button onClick={handleEditUser}>Edit</Button>
+              <Button onClick={handleDeleteUser}>Delete</Button>
                     </TableCell>
                     <TableCell className="hidden xl:table-column">
                       Sale
@@ -272,6 +300,8 @@ export default function Dashboard() {
                       <div className="hidden text-sm text-muted-foreground md:inline">
                         olivia@example.com
                       </div>
+                      <Button onClick={handleEditUser}>Edit</Button>
+              <Button onClick={handleDeleteUser}>Delete</Button>
                     </TableCell>
                     <TableCell className="hidden xl:table-column">
                       Refund
@@ -292,6 +322,8 @@ export default function Dashboard() {
                       <div className="hidden text-sm text-muted-foreground md:inline">
                         noah@example.com
                       </div>
+                      <Button onClick={handleEditUser}>Edit</Button>
+              <Button onClick={handleDeleteUser}>Delete</Button>
                     </TableCell>
                     <TableCell className="hidden xl:table-column">
                       Subscription
@@ -312,6 +344,8 @@ export default function Dashboard() {
                       <div className="hidden text-sm text-muted-foreground md:inline">
                         emma@example.com
                       </div>
+                      <Button onClick={handleEditUser}>Edit</Button>
+              <Button onClick={handleDeleteUser}>Delete</Button>
                     </TableCell>
                     <TableCell className="hidden xl:table-column">
                       Sale
@@ -332,6 +366,8 @@ export default function Dashboard() {
                       <div className="hidden text-sm text-muted-foreground md:inline">
                         liam@example.com
                       </div>
+                      <Button onClick={handleEditUser}>Edit</Button>
+              <Button onClick={handleDeleteUser}>Delete</Button>
                     </TableCell>
                     <TableCell className="hidden xl:table-column">
                       Sale
