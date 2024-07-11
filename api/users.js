@@ -149,3 +149,95 @@ export async function checkPermission(token) {
     throw new Error("Invalid Login");
   }
 }
+
+export async function getOrderDetails(token) {
+  // Define the URL for fetching order details
+  const orderURL = BASE_URL + "/order";
+  console.log(orderURL);
+
+  // Perform the fetch request
+  const res = await fetch(orderURL, {
+    method: "GET",
+    headers: { 
+      "Content-Type": "application/json", 
+      "Authorization": token 
+    }
+  });
+
+  // Check if request was successful
+  if (res.ok) {
+    console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error fetching order details");
+  }
+}
+
+
+export async function getProductPrice(productName) {
+  const productURL = `${BASE_URL}/product?name=${encodeURIComponent(productName)}`;
+  console.log(productURL);
+
+  const res = await fetch(productURL, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    console.log("api",data);
+    const price= data.data.price;
+    console.log("api price",price);
+    return price;
+    
+  } else {
+    throw new Error(`Error fetching price for product: ${productName}`);
+  }
+}
+
+export async function getAllProduct() {
+  const productsURL = `${BASE_URL}/products`;
+  console.log(productsURL);
+
+  const res = await fetch(productsURL, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } else {
+    throw new Error("Error fetching all product prices");
+  }
+}
+
+export async function placeOrder(token, order) {
+  // Fetch uses an options object as a second arg to make requests
+  // other than basic GET requests, include data, headers, etc.
+  console.log(order);
+
+  const jsonString = JSON.stringify(order, null, 2);  // Pretty print with 2-space indentation
+
+  console.log(jsonString);
+  
+  const orderURL = BASE_URL + "/order";
+  console.log(orderURL);
+  const res = await fetch(orderURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    // Fetch requires data payloads to be stringified
+    // and assigned to a body property on the options object
+    body: JSON.stringify(order),
+  });
+  // Check if request was successful
+  console.log(res);
+  if (res.ok) {
+    // res.json() will resolve to the JWT
+    // console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error placing order");
+  }
+}

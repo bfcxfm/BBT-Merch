@@ -132,7 +132,7 @@
   .wrapper-tea {
     position: relative;
     width: 300px;
-    height: 485px;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,7 +172,7 @@
   .wrapper-coffee {
     position: relative;
     width: 300px;
-    height: 485px;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;

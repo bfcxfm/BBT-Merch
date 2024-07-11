@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Button } from "@/components/ui/button";
 import { EnvelopeOpenIcon } from "@radix-ui/react-icons";
@@ -8,18 +8,50 @@ import SignUpForm from "./components/SignUpForm";
 import Dashboard from "./components/AdminPage";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { Route, Routes, useLocation } from "react-router-dom";
-import OrderPage from "./components/OrderPage";
 import NavBar from "./components/NavBar";
+import UserPage from "./components/UserPage";
+import { getUser } from "../service/users";
+import OrderPage from "./components/OrderPage";
+import CartPage from "./components/CartPage";
 
 function App() {
-  const [count, setCount] = useState(0);
   const location = useLocation();
   const isRootPath = location.pathname === "/";
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getUser);
+  // useEffect(() => {
+  //   const fetchedUser = getUser(); // You can replace this with an API call if needed
+  //   setUser(fetchedUser);
+  // }, []);
+
+  const [isCartOpen, setIsCartOpen] = useState(false);  // State to control the cart sheet
+  const [isDialogOpen, setIsDialogOpen] = useState(false);  // State to control the dialog
+
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+    setIsDialogOpen(false); // Close dialog after adding to cart
+    setIsCartOpen(true);    // Open cart sheet
+  };
+
+  const updateCartItem = (index, updatedItem) => {
+    const newCartItems = [...cartItems];
+    newCartItems[index] = updatedItem;
+    setCartItems(newCartItems);
+  };
+
+  const removeFromCart = (index) => {
+    const newCartItems = cartItems.filter((_, i) => i !== index);
+    setCartItems(newCartItems);
+  };
+  
 
   return (
     <div className="flex flex-col">
-      {isRootPath && <NavBar />} {/* Always include NavBar at the top */}
+      {isRootPath && <NavBar isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart} setCartItems={setCartItems}/>} {/* Always include NavBar at the top */}
       <div className="flex flex-1 flex-col">
         <Routes>
           <Route
@@ -27,7 +59,7 @@ function App() {
             element={
               <div className="grid  grid-cols-4 gap-4">
                 <div className="mt-4 col-span-4">
-                  <DrinksPage />
+                  <DrinksPage addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen}/>
                 </div>
               </div>
             }
@@ -52,8 +84,31 @@ function App() {
               </div>
             }
           />
-        </Routes>
-        <Routes>
+          <Route
+            path="/order"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                <OrderPage />
+                </TooltipProvider>
+              </div>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                <CartPage 
+                cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}
+              />
+                </TooltipProvider>
+              </div>
+            }
+          />
           <Route
             path="/admin"
             element={
@@ -63,13 +118,13 @@ function App() {
                 </TooltipProvider>
               </div>
             }
-          />
+          /> 
           <Route
             path="/user"
             element={
               <div className="col-span-4">
                 <TooltipProvider>
-                  <OrderPage />
+                  <UserPage />
                 </TooltipProvider>
               </div>
             }

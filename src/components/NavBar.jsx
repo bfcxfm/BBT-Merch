@@ -54,7 +54,7 @@ import {
 } from "@/components/ui/pagination";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -78,12 +78,19 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { getUser, logoutUser } from "../../service/users";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CartPage from "./CartPage";
 
-export default function NavBar() {
+export default function NavBar({cartItems, updateCartItem, removeFromCart, addToCart, isCartOpen, setIsCartOpen, setCartItems }) {
+
   const [user, setUser] = useState(getUser);
 
   // console.log(user);
+
+  // useEffect(() => {
+  //   const fetchedUser = getUser(); // You can replace this with an API call if needed
+  //   setUser(fetchedUser);
+  // }, []);
 
   const handleLogout = () => {
     logoutUser().then(() => {
@@ -103,7 +110,7 @@ export default function NavBar() {
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
             <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">BBT</span>
           </Link>
           <Link
             href="#"
@@ -111,12 +118,13 @@ export default function NavBar() {
           >
             Menu
           </Link>
+          {user &&
           <Link
-            href="#"
+            to="/user" relative="path"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Orders
-          </Link>
+          </Link>}
           <Link
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
@@ -129,6 +137,30 @@ export default function NavBar() {
           >
             Contact
           </Link>
+
+          
+
+          <Sheet open={isCartOpen} onOpenChange={setIsCartOpen} >
+      <SheetTrigger asChild>
+        <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
+      </SheetTrigger>
+      <SheetContent className="overflow-auto">
+        <SheetHeader>
+          <SheetTitle>View Cart</SheetTitle>
+          <SheetDescription>
+            Make changes to Cart. Checkout when you're done.
+          </SheetDescription>
+        </SheetHeader>
+        <CartPage cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}
+                isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} setCartItems={setCartItems}/>
+        
+      </SheetContent>
+    </Sheet>
+
+
         </nav>
         <Sheet>
           <SheetTrigger asChild>
@@ -148,17 +180,18 @@ export default function NavBar() {
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only">BBT</span>
               </Link>
               <Link href="#" className="hover:text-foreground">
                 Menu
               </Link>
+              {user &&
               <Link
-                href="#"
+                to="/user" relative="path"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Orders
-              </Link>
+              </Link>}
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
