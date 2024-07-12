@@ -43,7 +43,15 @@ export async function logoutUser() {
 export function getUser() {
   const token = getToken();
   // If there's a token, return the user in the payload, otherwise return null
+
   return token ? JSON.parse(atob(token.split(".")[1])).payload.user : null;
+}
+
+export function getAdmin() {
+  const token = getToken();
+  // If there's a token, return the user in the payload, otherwise return null
+
+  return token ? JSON.parse(atob(token.split(".")[1])).payload.is_admin: null;
 }
 
 export async function checkLogin() {
@@ -62,11 +70,36 @@ export async function checkPermission() {
   // Baby step by returning whatever is sent back by the server
   return res;
 }
+
 export async function getOrderDetails(){
   const token = getToken();
+  console.log("token", token);
   // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
   const res = await usersAPI.getOrderDetails(token);
+  // Baby step by returning whatever is sent back by the server
+  console.log("service", res);
+  return res;
+
+}
+
+export async function updateOrderDetails(orderId, updateOrder){
+  const token = getToken();
+  console.log("token", token);
+  // Delegate the network request code to the users-api.js API module
+  // which will ultimately return a JSON Web Token (JWT)
+  const res = await usersAPI.updateOrderDetails(token,orderId,updateOrder);
+  // Baby step by returning whatever is sent back by the server
+  console.log("service", res);
+  return res;
+}
+
+export async function getAllOrderDetails(){
+  const token = getToken();
+  console.log("token", token);
+  // Delegate the network request code to the users-api.js API module
+  // which will ultimately return a JSON Web Token (JWT)
+  const res = await usersAPI.getAllOrderDetails(token);
   // Baby step by returning whatever is sent back by the server
   console.log("service", res);
   return res;

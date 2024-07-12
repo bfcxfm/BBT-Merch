@@ -174,6 +174,56 @@ export async function getOrderDetails(token) {
 }
 
 
+export async function updateOrderDetails(token, orderId, updateOrder) {
+  // Define the URL for updating order details
+   const updateURL = BASE_URL + "/order/" + orderId;
+   console.log(updateURL);
+   console.log("update",updateOrder);
+
+   const res = await fetch(updateURL, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    // Fetch requires data payloads to be stringified
+    // and assigned to a body property on the options object
+    body: JSON.stringify(updateOrder),
+  });
+  if (res.ok) {
+    // res.json() will resolve to the JWT
+    console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error updating order details");
+  }
+}
+
+
+
+export async function getAllOrderDetails(token) {
+  // Define the URL for fetching order details
+  const orderURL = BASE_URL + "/orders";
+  console.log(orderURL);
+  console.log(token);
+
+  // Perform the fetch request
+  const res = await fetch(orderURL, {
+    method: "GET",
+    headers: { 
+      "Content-Type": "application/json", 
+      "Authorization": token 
+    }
+  });
+
+  // Check if request was successful
+  if (res.ok) {
+    console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error fetching order details");
+  }
+}
+
+
+
 export async function getProductPrice(productName) {
   const productURL = `${BASE_URL}/product?name=${encodeURIComponent(productName)}`;
   console.log(productURL);

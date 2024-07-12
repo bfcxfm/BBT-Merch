@@ -470,7 +470,9 @@ export default function UserPage() {
                     <span className="sr-only">Copy Order ID</span>
                   </Button>
                 </CardTitle>
-                <CardDescription>Date: {formatDate(selectedOrder.createdAt)}</CardDescription>
+                <CardDescription>Date: {formatDate(selectedOrder.createdAt)}
+                  <div className="font-semibold bg-black text-white mx-auto w-auto rounded-md">{selectedOrder.status}</div>
+                </CardDescription>
               </div>
               <div className="ml-auto flex items-center gap-1">
                 <Button size="sm" variant="outline" className="h-8 gap-1">
