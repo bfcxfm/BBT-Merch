@@ -16,6 +16,7 @@ import {
   Search,
   Truck,
   Users,
+  X,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -47,6 +48,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 import { useEffect, useState } from "react";
 import { getUser, logoutUser, getAllOrderDetails, updateOrderDetails, getAdmin } from "../../service/users";
 import { Separator } from "./ui/separator";
@@ -506,12 +519,26 @@ export default function Dashboard() {
               </div>
               <div className="ml-auto flex items-center gap-1">
               
-                <Button size="sm" variant="outline" className="h-8 gap-1" onClick={() => completeOrder(selectedOrder._id)}>
-                  <CircleCheckBig className="h-3.5 w-3.5" />
-                  <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
-                    Done
-                  </span>
-                </Button>
+              <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button size="sm" variant="outline" className="h-8 gap-1">
+                        <CircleCheckBig className="h-3.5 w-3.5" />
+                        <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Done</span>
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Confirm Order Completion?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will complete the order.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => completeOrder(selectedOrder._id)}>Continue</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button size="icon" variant="outline" className="h-8 w-8">
@@ -523,7 +550,27 @@ export default function Dashboard() {
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem>Export</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => cancellOrder(selectedOrder._id)} >Cancel Order</DropdownMenuItem>
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                        {/* <Button size="icon" variant="destructive"><X className="h-3.5 w-3.5"/></Button> */}
+                        <Button size="sm" variant="destructive" className="h-8 gap-1">
+                        <X className="h-3.5 w-3.5" />
+                        <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Cancel Order</span>
+                      </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Confirm Order Cancellation?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will cancel the order.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => cancellOrder(selectedOrder._id)}>Continue</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
