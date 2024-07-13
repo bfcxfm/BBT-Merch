@@ -16,7 +16,7 @@ import { Checkbox } from "./ui/checkbox"
 import { Button } from "./ui/button"
 import { useNavigate } from "react-router-dom"
 
-export default function OrderPage({ selectedTea, selectedCoffee, addToCart, isDialogOpen, setIsDialogOpen, isCartOpen, setIsCartOpen }) {
+export default function OrderPage({ selectedTea, selectedCoffee, selectedDrink, addToCart, isDialogOpen, setIsDialogOpen, isCartOpen, setIsCartOpen }) {
 
   // console.log(selectedCoffee);
   // console.log(mainProduct);
@@ -49,25 +49,46 @@ export default function OrderPage({ selectedTea, selectedCoffee, addToCart, isDi
   const [mainProductPrice, setMainProductPrice] = useState(0);
   const [toppingPrices, setToppingPrices] = useState({});
 
-  const [mainProduct, setMainProduct] = useState(selectedTea || selectedCoffee);
-  const prevTeaRef = useRef(selectedTea);
-  const prevCoffeeRef = useRef(selectedCoffee);
+  // const [mainProduct, setMainProduct] = useState(selectedTea || selectedCoffee);
+  // const prevTeaRef = useRef(selectedTea);
+  // const prevCoffeeRef = useRef(selectedCoffee);
+
+  // useEffect(() => {
+  //   if (selectedTea !== prevTeaRef.current) {
+  //     setMainProduct(selectedTea);
+  //     prevTeaRef.current = selectedTea;
+  //   } else if (selectedCoffee !== prevCoffeeRef.current) {
+  //     setMainProduct(selectedCoffee);
+  //     prevCoffeeRef.current = selectedCoffee;
+  //   }
+  // }, [selectedTea, selectedCoffee]);
+
+  const [mainProduct, setMainProduct] = useState(selectedDrink);
 
   useEffect(() => {
-    if (selectedTea !== prevTeaRef.current) {
-      setMainProduct(selectedTea);
-      prevTeaRef.current = selectedTea;
-    } else if (selectedCoffee !== prevCoffeeRef.current) {
-      setMainProduct(selectedCoffee);
-      prevCoffeeRef.current = selectedCoffee;
+    setMainProduct(selectedDrink);
+    if (isDialogOpen) {
+      fetchPrices();
     }
-  }, [selectedTea, selectedCoffee]);
+  }, [selectedDrink, isDialogOpen]);
+
+
+  // useEffect(() => {
+  //     setMainProduct(selectedDrink);
+      
+  // }, [selectedDrink]);
+
+  // useEffect(() => {
+  //   if (isDialogOpen) {
+  //     fetchPrices();
+  //   }
+  // }, [isDialogOpen, mainProduct]);
 
 
 
-  useEffect(() => {
-    fetchPrices();
-  }, [mainProduct]);
+  // useEffect(() => {
+  //   fetchPrices();
+  // }, [mainProduct]);
 
   useEffect(() => {
     calculateTotalPrice();
@@ -165,7 +186,7 @@ export default function OrderPage({ selectedTea, selectedCoffee, addToCart, isDi
     const drinkToAdd = {
       mainProduct,
       ...currentDrink,
-      totalPrice
+      totalPrice: totalPrice / currentDrink.quantity // Price per item
     };
     console.log(drinkToAdd);
     addToCart(drinkToAdd);

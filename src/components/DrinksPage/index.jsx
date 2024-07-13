@@ -40,6 +40,10 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
   //   setCartItems([...cartItems, item]);
   // };
 
+
+  const [isTeaDialogOpen, setIsTeaDialogOpen] = useState(false);
+  const [isCoffeeDialogOpen, setIsCoffeeDialogOpen] = useState(false);
+
   const teaOptions = [
     "TEA",
     "CHEESE TEA",
@@ -106,6 +110,14 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
     // "Cortado",
   ];
 
+  const formatDrinkName = (name) => {
+    return name
+      .replace(/-/g, " ")
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   return (
     <>
       <div className=" drinks-page tea-bg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mx-auto pb-4 pt-4 items-center justify-center">
@@ -137,7 +149,7 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
           </div>
         </div>
         <div className="col-span-1 sm:order-first sm:col-start-1 sm:-mb-10 lg:order-first lg:col-start-1 mx-auto ">
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog open={isTeaDialogOpen} onOpenChange={setIsTeaDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline"><CirclePlus className="w-5 h-5 mr-2" /> Select Option</Button>
       </DialogTrigger>
@@ -149,16 +161,12 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
             Customise your drink 
           </DialogDescription>
         </DialogHeader>
-        <OrderPage selectedTea={selectedTeaDrink
-          .replace(/-/g, " ")
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}
-          selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
-          addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} />
+        <OrderPage 
+                selectedDrink={formatDrinkName(selectedTeaDrink)}
+                addToCart={addToCart} 
+                isDialogOpen={isTeaDialogOpen} 
+                setIsDialogOpen={setIsTeaDialogOpen} 
+              />
         
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
@@ -208,7 +216,7 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
         </div>
 
         <div className="col-span-1 sm:col-start-2 sm:-mt-10 lg:col-start-6 lg:mr-20 pt-8 mx-auto ">
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog open={isCoffeeDialogOpen} onOpenChange={setIsCoffeeDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Select Option<CirclePlus className="w-5 h-5 ml-2" /></Button>
       </DialogTrigger>
@@ -219,16 +227,12 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
             Customise your drink 
           </DialogDescription>
         </DialogHeader>
-        <OrderPage selectedTea={selectedTeaDrink
-          .replace(/-/g, " ")
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}
-          selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}
-          addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen}/>
+        <OrderPage 
+                selectedDrink={formatDrinkName(selectedCoffeeDrink)}
+                addToCart={addToCart} 
+                isDialogOpen={isCoffeeDialogOpen} 
+                setIsDialogOpen={setIsCoffeeDialogOpen}
+              />
         
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
