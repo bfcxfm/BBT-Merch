@@ -78,7 +78,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useEffect, useState } from "react";
-import { getOrderDetails, getUser, logoutUser } from "../../service/users";
+import { getOrderDetails, getUser, logoutUser, deleteOrder } from "../../service/users";
 
 export default function UserPage() {
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -91,6 +91,16 @@ export default function UserPage() {
   
 
   // console.log(user);
+  const handleDeleteOrder = async (order) => {
+    try {
+      await deleteOrder(order); // Assuming deleteOrder is an async function
+      // Update local state or refetch orders to reflect the deletion
+      console.log(`Order ${order} deleted successfully.`);
+      // Optionally, close any open menus or dialogs here
+    } catch (error) {
+      console.error("Failed to delete order", error);
+    }
+  };
 
   const handleLogout = () => {
     logoutUser().then(() => {
@@ -490,7 +500,7 @@ export default function UserPage() {
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem>Export</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Trash</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDeleteOrder(selectedOrder)}>Trash</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>

@@ -38,10 +38,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getUser, placeOrder } from '../../service/users';
+import { getUser, placeOrder, deleteOrder } from '../../service/users';
 import { Link } from 'react-router-dom';
 
-export default function CartPage({ cartItems, updateCartItem, removeFromCart, isCartOpen, setIsCartOpen, setCartItems}) {
+export default function CartPage({ cartItems, updateCartItem, isCartOpen, setIsCartOpen, setCartItems}) {
   const [total, setTotal] = useState(0);
   const [user, setUser] = useState(getUser);
 
@@ -55,6 +55,18 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
       const updatedItem = { ...cartItems[index], quantity: newQuantity };
       updateCartItem(index, updatedItem);
       console.log('Cart item:', cartItems);
+    }
+  };
+
+  const handleDeleteOrder = async (orderId) => {
+    console.log('Deleting order:', orderId);
+    try {
+      await deleteOrder(orderId);
+      const updatedCartItems = cartItems.filter(item => item.id !== orderId);
+      setCartItems(updatedCartItems);
+      console.log('Order deleted successfully');
+    } catch (error) {
+      console.error('Failed to delete order:', error);
     }
   };
 
@@ -131,7 +143,7 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
                 <Button
                   variant="destructive"
                   size="icon"
-                  onClick={() => removeFromCart(index)}
+                  onClick={() => handleDeleteOrder(item.id)}
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>

@@ -1,6 +1,7 @@
 import * as usersAPI from "../api/users";
 import { getToken, removeToken } from "../util/security";
 
+
 export async function signUp(userData) {
   // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
@@ -40,6 +41,46 @@ export async function logoutUser() {
   // return res;
 }
 
+export async function updateUser(email, userData) {
+  try {
+    const response = await fetch(`${usersAPI.BASE_URL}/user/${email}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        // Assuming you're using a token for authentication
+        'Authorization': `Bearer ${getToken()}`,
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update user');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
+}
+
+export async function deleteUser(email) {
+  try {
+    const response = await fetch(`${usersAPI.BASE_URL}/user/${email}`, {
+      method: 'DELETE',
+      headers: {
+        // Assuming you're using a token for authentication
+        'Authorization': `Bearer ${getToken()}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete user');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    throw error;
+  }
+}
+
 export function getUser() {
   const token = getToken();
   // If there's a token, return the user in the payload, otherwise return null
@@ -71,6 +112,25 @@ export async function getOrderDetails(){
   console.log("service", res);
   return res;
 
+}
+
+export async function deleteOrder(orderId) {
+  console.log('Deleting order:', orderId);
+  try {
+    const response = await fetch(`${usersAPI.BASE_URL}/order/${orderId}`, {
+      method: 'DELETE', // Changed from 'POST' to 'DELETE'
+      headers: {
+        'Authorization': `Bearer ${getToken()}`, 
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete order');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    throw error;
+  }
 }
 
 
