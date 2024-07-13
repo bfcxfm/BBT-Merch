@@ -7,10 +7,10 @@ import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
 import Dashboard from "./components/AdminPage";
 import { TooltipProvider } from "./components/ui/tooltip";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import UserPage from "./components/UserPage";
-import { getUser } from "../service/users";
+import { getAdmin, getUser } from "../service/users";
 import OrderPage from "./components/OrderPage";
 import CartPage from "./components/CartPage";
 
@@ -18,6 +18,14 @@ function App() {
   const location = useLocation();
   const isRootPath = location.pathname === "/";
   const [user, setUser] = useState(getUser);
+
+  const [admin, setAdmin] = useState(getAdmin);
+
+  function PrivateRoute({ children, admin }) {
+    return admin ? children : <Navigate to="/" replace />;
+  }
+
+  
   // useEffect(() => {
   //   const fetchedUser = getUser(); // You can replace this with an API call if needed
   //   setUser(fetchedUser);
@@ -112,13 +120,15 @@ function App() {
           <Route
             path="/admin"
             element={
-              <div className="col-span-4">
-                <TooltipProvider>
-                  <Dashboard />
-                </TooltipProvider>
-              </div>
+              <PrivateRoute admin={admin}>
+                <div className="col-span-4">
+                  <TooltipProvider>
+                    <Dashboard />
+                  </TooltipProvider>
+                </div>
+              </PrivateRoute>
             }
-          /> 
+          />
           <Route
             path="/user"
             element={

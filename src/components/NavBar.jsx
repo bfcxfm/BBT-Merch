@@ -77,15 +77,16 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { getUser, logoutUser } from "../../service/users";
+import { getAdmin, getUser, logoutUser } from "../../service/users";
 import { useEffect, useState } from "react";
 import CartPage from "./CartPage";
 
 export default function NavBar({cartItems, updateCartItem, removeFromCart, addToCart, isCartOpen, setIsCartOpen, setCartItems }) {
 
   const [user, setUser] = useState(getUser);
+  const [admin, setAdmin] = useState(getAdmin);
 
-  // console.log(user);
+  console.log(admin);
 
   // useEffect(() => {
   //   const fetchedUser = getUser(); // You can replace this with an API call if needed
@@ -105,6 +106,8 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
     <div className="w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        
+          
           <Link
             href="#"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
@@ -112,6 +115,13 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
             <Package2 className="h-6 w-6" />
             <span className="sr-only">BBT</span>
           </Link>
+          {admin &&
+              <Link
+                to="/admin" relative="path"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Admin
+              </Link>}
           <Link
             href="#"
             className="text-foreground transition-colors hover:text-foreground"
@@ -140,25 +150,6 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
 
           
 
-          <Sheet open={isCartOpen} onOpenChange={setIsCartOpen} >
-      <SheetTrigger asChild>
-        <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
-      </SheetTrigger>
-      <SheetContent className="overflow-auto">
-        <SheetHeader>
-          <SheetTitle>View Cart</SheetTitle>
-          <SheetDescription>
-            Make changes to Cart. Checkout when you're done.
-          </SheetDescription>
-        </SheetHeader>
-        <CartPage cartItems={cartItems}
-                updateCartItem={updateCartItem}
-                removeFromCart={removeFromCart}
-                addToCart={addToCart}
-                isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} setCartItems={setCartItems}/>
-        
-      </SheetContent>
-    </Sheet>
 
 
         </nav>
@@ -175,6 +166,7 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
           </SheetTrigger>
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
+            
               <Link
                 href="#"
                 className="flex items-center gap-2 text-lg font-semibold"
@@ -182,6 +174,13 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
                 <Package2 className="h-6 w-6" />
                 <span className="sr-only">BBT</span>
               </Link>
+              {admin &&
+              <Link
+                to="/admin" relative="path"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Admin
+              </Link>}
               <Link href="#" className="hover:text-foreground">
                 Menu
               </Link>
@@ -198,12 +197,7 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
               >
                 Products
               </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Customers
-              </Link>
+              
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
@@ -214,6 +208,25 @@ export default function NavBar({cartItems, updateCartItem, removeFromCart, addTo
           </SheetContent>
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+        <Sheet open={isCartOpen} onOpenChange={setIsCartOpen} >
+      <SheetTrigger asChild>
+        <Button variant="ghost"><ShoppingCart className="w-5 h-5 mr-2" />Cart {cartItems.length} </Button>
+      </SheetTrigger>
+      <SheetContent className="overflow-auto">
+        {/* <SheetHeader>
+          <SheetTitle>View Cart</SheetTitle>
+          <SheetDescription>
+            Make changes to Cart. Checkout when you're done.
+          </SheetDescription>
+        </SheetHeader> */}
+        <CartPage cartItems={cartItems}
+                updateCartItem={updateCartItem}
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}
+                isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} setCartItems={setCartItems}/>
+        
+      </SheetContent>
+    </Sheet>
           <form className="ml-auto flex-1 sm:flex-initial">
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
