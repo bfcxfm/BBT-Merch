@@ -22,7 +22,7 @@ function App() {
   const [admin, setAdmin] = useState(getAdmin);
 
   function PrivateRoute({ children, admin }) {
-    return admin ? children : <Navigate to="/" replace />;
+    return admin ? children : <Navigate to="/admin" replace />;
   }
 
   
@@ -120,13 +120,13 @@ function App() {
           <Route
             path="/admin"
             element={
-              <PrivateRoute admin={admin}>
+              
                 <div className="col-span-4">
                   <TooltipProvider>
                     <Dashboard />
                   </TooltipProvider>
                 </div>
-              </PrivateRoute>
+              
             }
           />
           <Route

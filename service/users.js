@@ -30,6 +30,8 @@ export async function loginUser(userData) {
 
 export async function logoutUser() {
   const token = getToken();
+  console.log("part1", token)
+  console.log("part2",JSON.parse(atob(token.split(".")[1])).payload)
   if (token) {
     const res = await usersAPI.logoutUser(
       token,
@@ -117,7 +119,7 @@ export async function getOrderDetails(){
   console.log("token", token);
   // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
-  const res = await usersAPI.getOrderDetails(token);
+  const res = await usersAPI.getOrderDetails(token, JSON.parse(atob(token.split(".")[1])).payload);
   // Baby step by returning whatever is sent back by the server
   console.log("service", res);
   return res;
@@ -129,7 +131,11 @@ export async function updateOrderDetails(orderId, updateOrder){
   console.log("token", token);
   // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
-  const res = await usersAPI.updateOrderDetails(token,orderId,updateOrder);
+  const payload = {
+    ...updateOrder,
+    ...JSON.parse(atob(token.split(".")[1])).payload,
+  };
+  const res = await usersAPI.updateOrderDetails(token,orderId,payload);
   // Baby step by returning whatever is sent back by the server
   console.log("service", res);
   return res;
@@ -140,7 +146,7 @@ export async function getAllOrderDetails(){
   console.log("token", token);
   // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
-  const res = await usersAPI.getAllOrderDetails(token);
+  const res = await usersAPI.getAllOrderDetails(token, JSON.parse(atob(token.split(".")[1])).payload);
   // Baby step by returning whatever is sent back by the server
   console.log("service", res);
   return res;
@@ -212,7 +218,13 @@ export async function getAllProduct(){
 
 export async function placeOrder(order){
   const token = getToken();
-  const res = await usersAPI.placeOrder(token, order);
+  const payload = {
+    ...order,
+    ...JSON.parse(atob(token.split(".")[1])).payload,
+  };
+  const res = await usersAPI.placeOrder(
+    token, 
+    payload);
   console.log("service", res);
   return res;
 }
