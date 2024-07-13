@@ -150,18 +150,19 @@ export async function checkPermission(token) {
   }
 }
 
-export async function getOrderDetails(token) {
+export async function getOrderDetails(token,userData) {
   // Define the URL for fetching order details
   const orderURL = BASE_URL + "/order";
   console.log(orderURL);
 
   // Perform the fetch request
   const res = await fetch(orderURL, {
-    method: "GET",
+    method: "POST",
     headers: { 
       "Content-Type": "application/json", 
       "Authorization": token 
-    }
+    },
+    body: JSON.stringify(userData),
   });
 
   // Check if request was successful
@@ -198,7 +199,7 @@ export async function updateOrderDetails(token, orderId, updateOrder) {
 
 
 
-export async function getAllOrderDetails(token) {
+export async function getAllOrderDetails(token, userData) {
   // Define the URL for fetching order details
   const orderURL = BASE_URL + "/orders";
   console.log(orderURL);
@@ -206,11 +207,12 @@ export async function getAllOrderDetails(token) {
 
   // Perform the fetch request
   const res = await fetch(orderURL, {
-    method: "GET",
+    method: "POST",
     headers: { 
       "Content-Type": "application/json", 
       "Authorization": token 
-    }
+    },
+    body: JSON.stringify(userData),
   });
 
   // Check if request was successful
@@ -272,7 +274,7 @@ export async function placeOrder(token, order) {
 
   console.log(jsonString);
   
-  const orderURL = BASE_URL + "/order";
+  const orderURL = BASE_URL + "/neworder";
   console.log(orderURL);
   const res = await fetch(orderURL, {
     method: "POST",
