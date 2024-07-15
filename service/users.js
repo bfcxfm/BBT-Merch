@@ -141,28 +141,6 @@ export async function updateOrderDetails(orderId, updateOrder){
   return res;
 }
 
-export async function getAllOrderDetails(){
-  const token = getToken();
-  console.log("token", token);
-  // Delegate the network request code to the users-api.js API module
-  // which will ultimately return a JSON Web Token (JWT)
-  const res = await usersAPI.getAllOrderDetails(token, JSON.parse(atob(token.split(".")[1])).payload);
-  // Baby step by returning whatever is sent back by the server
-  console.log("service", res);
-  return res;
-
-}
-
-export async function updateOrderDetails(orderId, updateOrder){
-  const token = getToken();
-  console.log("token", token);
-  // Delegate the network request code to the users-api.js API module
-  // which will ultimately return a JSON Web Token (JWT)
-  const res = await usersAPI.updateOrderDetails(token,orderId,updateOrder);
-  // Baby step by returning whatever is sent back by the server
-  console.log("service", res);
-  return res;
-}
 
 export async function getAllOrderDetails(){
   const token = getToken();

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { editUser, deleteUser, editOrder, deleteOrder } from '../../api/admin';
 
 import {
@@ -62,7 +62,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-import { useEffect, useState } from "react";
 import { getUser, logoutUser, getAllOrderDetails, updateOrderDetails, getAdmin } from "../../service/users";
 import { Separator } from "./ui/separator";
 import { Pagination, PaginationContent, PaginationItem } from "./ui/pagination";
