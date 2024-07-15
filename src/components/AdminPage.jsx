@@ -60,7 +60,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
 import { getUser, logoutUser, getAllOrderDetails, updateOrderDetails, getAdmin } from "../../service/users";
 import { Separator } from "./ui/separator";
@@ -69,6 +69,7 @@ import { Pagination, PaginationContent, PaginationItem } from "./ui/pagination";
 export default function Dashboard() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [editOrder, setEditOrder] = useState(null);
 
   console.log(selectedOrder);
 
@@ -78,16 +79,16 @@ export default function Dashboard() {
 
   console.log(user);
 
-  const updateDone={status: "completed"};
-  const updateCancel={status: "cancelled"};
+  const updateDone = { status: "completed" };
+  const updateCancel = { status: "cancelled" };
 
   async function fetchOrders() {
     try {
       const orderData = await getAllOrderDetails();
       const ordersList = orderData.data;
-  
+
       setOrders(ordersList.reverse());
-  
+
       if (!selectedOrder && ordersList.length > 0) {
         setSelectedOrder(ordersList[0]);
       }
@@ -95,22 +96,20 @@ export default function Dashboard() {
       console.error("Error fetching orders", error);
     }
   }
-  
 
   // console.log(user);
 
   async function completeOrder(orderId) {
     try {
       const res = await updateOrderDetails(orderId, updateDone);
-      console.log("complete",res);
+      console.log("complete", res);
 
       if (!res.success) {
-      throw new Error(`Failed to complete order: ${res.statusText}`);
-    }
+        throw new Error(`Failed to complete order: ${res.statusText}`);
+      }
       fetchOrders();
-      const updatedOrder = { ...selectedOrder, status: 'Completed' }; 
+      const updatedOrder = { ...selectedOrder, status: "Completed" };
       setSelectedOrder(updatedOrder);
-
     } catch (error) {
       console.error(`Error completing order ${orderId}:`, error);
     }
@@ -119,32 +118,29 @@ export default function Dashboard() {
   async function cancellOrder(orderId) {
     try {
       const res = await updateOrderDetails(orderId, updateCancel);
-      console.log("cancel",res);
+      console.log("cancel", res);
 
       if (!res.success) {
-      throw new Error(`Failed to cancel order: ${res.statusText}`);
-    }
-      const updatedOrder = { ...selectedOrder, status: 'cancelled' }; 
+        throw new Error(`Failed to cancel order: ${res.statusText}`);
+      }
+      const updatedOrder = { ...selectedOrder, status: "cancelled" };
       setSelectedOrder(updatedOrder);
 
-    
       fetchOrders();
-
     } catch (error) {
       console.error(`Error cancelling order ${orderId}:`, error);
     }
   }
 
-
-
-
   const handleLogout = () => {
-    logoutUser().then(() => {
-      setUser(getUser()); // Update state after logout is complete
-      navigate('/');
-    }).catch((error) => {
-      console.error("Logout failed", error);
-    });
+    logoutUser()
+      .then(() => {
+        setUser(getUser()); // Update state after logout is complete
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Logout failed", error);
+      });
   };
 
   const handleOrderSelect = (order) => {
@@ -152,8 +148,14 @@ export default function Dashboard() {
     console.log(selectedOrder);
   };
 
+  const handleEditorder = (order) => {
+    setSelectedOrder(order);
+    console.log(selectedOrder);
+  };
+
+
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
@@ -635,37 +637,42 @@ export default function Dashboard() {
                         <span className="text-muted-foreground">Updated At</span>
                         <span>{formatDate(comment.updatedAt)}</span>
                       </div> */}
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Comment</span>
-                        <span>{comment.content}</span>
-                      </div>
-                    </div>
-                ))}
-                    </li>
-                  ))}
-                  
-                </ul>
-                <Separator className="my-2" />
-                <ul className="grid gap-3">
-                  <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Subtotal</span>
-                    <span>${selectedOrder.total.toFixed(2)}</span>
-                  </li>
-                  <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Shipping</span>
-                    <span>$0.00</span>
-                  </li>
-                  {/* <li className="flex items-center justify-between">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">
+                                      Comment
+                                    </span>
+                                    <span>{comment.content}</span>
+                                  </div>
+                                </div>
+                              ))}
+                          </li>
+                        ))}
+                      </ul>
+                      <Separator className="my-2" />
+                      <ul className="grid gap-3">
+                        <li className="flex items-center justify-between">
+                          <span className="text-muted-foreground">
+                            Subtotal
+                          </span>
+                          <span>${selectedOrder.total.toFixed(2)}</span>
+                        </li>
+                        <li className="flex items-center justify-between">
+                          <span className="text-muted-foreground">
+                            Shipping
+                          </span>
+                          <span>$0.00</span>
+                        </li>
+                        {/* <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Tax</span>
                     <span>$25.00</span>
                   </li> */}
-                  <li className="flex items-center justify-between font-semibold">
-                    <span className="text-muted-foreground">Total</span>
-                    <span>${selectedOrder.total.toFixed(2)}</span>
-                  </li>
-                </ul>
-              </div>
-              {/* <Separator className="my-4" />
+                        <li className="flex items-center justify-between font-semibold">
+                          <span className="text-muted-foreground">Total</span>
+                          <span>${selectedOrder.total.toFixed(2)}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    {/* <Separator className="my-4" />
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-3">
                   <div className="font-semibold">Shipping Information</div>
@@ -682,7 +689,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div> */}
-              {/* <Separator className="my-4" />
+                    {/* <Separator className="my-4" />
               <div className="grid gap-3">
                 <div className="font-semibold">Customer Information</div>
                 <dl className="grid gap-3">
@@ -704,46 +711,58 @@ export default function Dashboard() {
                   </div>
                 </dl>
               </div> */}
-              <Separator className="my-4" />
-              <div className="grid gap-3">
-                <div className="font-semibold">Payment Information</div>
-                <dl className="grid gap-3">
-                  <div className="flex items-center justify-between">
-                    <dt className="flex items-center gap-1 text-muted-foreground">
-                      <CreditCard className="h-4 w-4" />
-                      Visa
-                    </dt>
-                    <dd>**** **** **** 4532</dd>
-                  </div>
-                </dl>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
-              <div className="text-xs text-muted-foreground">
-                Updated <time dateTime="2023-11-23">{formatDate(selectedOrder.updatedAt)}</time>
-              </div>
-              <Pagination className="ml-auto mr-0 w-auto">
-                <PaginationContent>
-                  <PaginationItem>
-                    <Button size="icon" variant="outline" className="h-6 w-6">
-                      <ChevronLeft className="h-3.5 w-3.5" />
-                      <span className="sr-only">Previous Order</span>
-                    </Button>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <Button size="icon" variant="outline" className="h-6 w-6">
-                      <ChevronRight className="h-3.5 w-3.5" />
-                      <span className="sr-only">Next Order</span>
-                    </Button>
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </CardFooter>
-          </Card>
-          )}
+                    <Separator className="my-4" />
+                    <div className="grid gap-3">
+                      <div className="font-semibold">Payment Information</div>
+                      <dl className="grid gap-3">
+                        <div className="flex items-center justify-between">
+                          <dt className="flex items-center gap-1 text-muted-foreground">
+                            <CreditCard className="h-4 w-4" />
+                            Visa
+                          </dt>
+                          <dd>**** **** **** 4532</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
+                    <div className="text-xs text-muted-foreground">
+                      Updated{" "}
+                      <time dateTime="2023-11-23">
+                        {formatDate(selectedOrder.updatedAt)}
+                      </time>
+                    </div>
+                    <Pagination className="ml-auto mr-0 w-auto">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-6 w-6"
+                          >
+                            <ChevronLeft className="h-3.5 w-3.5" />
+                            <span className="sr-only">Previous Order</span>
+                          </Button>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-6 w-6"
+                          >
+                            <ChevronRight className="h-3.5 w-3.5" />
+                            <span className="sr-only">Next Order</span>
+                          </Button>
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </CardFooter>
+                </Card>
+              )}
+            </div>
+          </main>
         </div>
-      </main>
-    </div>)}
+      )}
     </>
   );
 }
