@@ -556,8 +556,8 @@ export default function Dashboard() {
                         <AlertDialogTrigger asChild>
                         {/* <Button size="icon" variant="destructive"><X className="h-3.5 w-3.5"/></Button> */}
                         <Button size="sm" variant="destructive" className="h-8 gap-1">
-                        <X className="h-3.5 w-3.5" />
-                        <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Cancel Order</span>
+                        <X className="h-5 w-5" />
+                        <span className="xl:not-sr-only xl:whitespace-nowrap">Cancel Order</span>
                       </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
