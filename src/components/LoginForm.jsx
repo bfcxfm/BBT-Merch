@@ -64,7 +64,8 @@ export default function LoginForm() {
       const currentUser = getUser(); // Fetch the user after successful login
       setUser(currentUser); // Set user state
 
-      if (currentUser) { // Redirect after setting state
+      if (currentUser) {
+        // Redirect after setting state
         navigate("/");
       }
     } catch (e) {

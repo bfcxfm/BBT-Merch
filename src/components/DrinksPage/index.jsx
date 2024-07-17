@@ -153,7 +153,7 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
       <DialogTrigger asChild>
         <Button variant="outline"><CirclePlus className="w-5 h-5 mr-2" /> Select Option</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-screen overflow-auto">
         <DialogHeader>
           
           <DialogTitle>  Select Options</DialogTitle>
@@ -220,7 +220,7 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
       <DialogTrigger asChild>
         <Button variant="outline">Select Option<CirclePlus className="w-5 h-5 ml-2" /></Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-screen overflow-auto">
         <DialogHeader>
           <DialogTitle>Select Options</DialogTitle>
           <DialogDescription>
