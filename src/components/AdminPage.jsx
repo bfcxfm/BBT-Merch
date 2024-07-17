@@ -186,7 +186,7 @@ export default function Dashboard() {
             Orders
           </Link>
           <Link
-            href="#"
+                        to={admin ? "/admin/product" : "/product"}
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Products
