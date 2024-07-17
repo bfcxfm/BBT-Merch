@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import { Card, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
 import OrderPage from "../OrderPage";
@@ -31,7 +31,7 @@ const formatOption = (option) => {
   return option.toLowerCase().replace(/\s/g, "-");
 };
 
-const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
+const DrinksPage = ({ addToCart, isDialogOpen, setIsDialogOpen }) => {
   const [selectedTeaDrink, setSelectedTeaDrink] = useState("milk-tea");
   const [selectedCoffeeDrink, setSelectedCoffeeDrink] = useState("latte");
   // const [selectedDrink, setSelectedDrink] = useState("milk-tea");
@@ -39,7 +39,6 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
   // const handleAddToCart = (item) => {
   //   setCartItems([...cartItems, item]);
   // };
-
 
   const [isTeaDialogOpen, setIsTeaDialogOpen] = useState(false);
   const [isCoffeeDialogOpen, setIsCoffeeDialogOpen] = useState(false);
@@ -114,14 +113,13 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
     return name
       .replace(/-/g, " ")
       .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
 
   return (
     <>
-      <div className=" drinks-page tea-bg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mx-auto pb-4 pt-4 items-center justify-center">
-        
+      <div className=" drinks-page tea-bg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mx-auto pb-4 pt-4 items-center justify-center dark:bg-gray-800">
         <div className="wrapper-tea col-span-1 sm:col-start-1 lg:col-start-2 p-4 mx-auto ">
           <div className="shadow"></div>
           <div className="title capitalize">
@@ -149,38 +147,35 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
           </div>
         </div>
         <div className="col-span-1 sm:order-first sm:col-start-1 sm:-mb-10 lg:order-first lg:col-start-1 mx-auto ">
-        <Dialog open={isTeaDialogOpen} onOpenChange={setIsTeaDialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline"><CirclePlus className="w-5 h-5 mr-2" /> Select Option</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md max-h-screen overflow-auto">
-        <DialogHeader>
-          
-          <DialogTitle>  Select Options</DialogTitle>
-          <DialogDescription>
-            Customise your drink 
-          </DialogDescription>
-        </DialogHeader>
-        <OrderPage 
+          <Dialog open={isTeaDialogOpen} onOpenChange={setIsTeaDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="outline">
+                <CirclePlus className="w-5 h-5 mr-2" /> Select Option
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md max-h-screen overflow-auto">
+              <DialogHeader>
+                <DialogTitle> Select Options</DialogTitle>
+                <DialogDescription>Customise your drink</DialogDescription>
+              </DialogHeader>
+              <OrderPage
                 selectedDrink={formatDrinkName(selectedTeaDrink)}
-                addToCart={addToCart} 
-                isDialogOpen={isTeaDialogOpen} 
-                setIsDialogOpen={setIsTeaDialogOpen} 
+                addToCart={addToCart}
+                isDialogOpen={isTeaDialogOpen}
+                setIsDialogOpen={setIsTeaDialogOpen}
               />
-        
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-          
-          </div>
 
-       
+              <DialogFooter className="sm:justify-start">
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Close
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+
         <div className="options-tea col-span-1 sm:col-start-2 lg:col-start-4  overflow-auto flex justify-center items-center mx-auto">
           {teaOptions.map((option, index) => (
             <div
@@ -198,7 +193,7 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
         </div>
       </div>
 
-      <div className="drinks-page coffee-bg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mx-auto pb-4 pt-4 items-center justify-center">
+      <div className="drinks-page coffee-bg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mx-auto pb-4 pt-4 items-center justify-center dark:bg-gray-700">
         <div className="options-coffee col-span-1 lg:col-start-2 mx-auto overflow-auto order-last sm:order-first flex justify-center items-center">
           {coffeeOptions.map((option, index) => (
             <div
@@ -216,35 +211,38 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
         </div>
 
         <div className="col-span-1 sm:col-start-2 sm:-mt-10 lg:col-start-6 lg:mr-20 pt-8 mx-auto ">
-        <Dialog open={isCoffeeDialogOpen} onOpenChange={setIsCoffeeDialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Select Option<CirclePlus className="w-5 h-5 ml-2" /></Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md max-h-screen overflow-auto">
-        <DialogHeader>
-          <DialogTitle>Select Options</DialogTitle>
-          <DialogDescription>
-            Customise your drink 
-          </DialogDescription>
-        </DialogHeader>
-        <OrderPage 
+          <Dialog
+            open={isCoffeeDialogOpen}
+            onOpenChange={setIsCoffeeDialogOpen}
+          >
+            <DialogTrigger asChild>
+              <Button variant="outline">
+                Select Option
+                <CirclePlus className="w-5 h-5 ml-2" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md max-h-screen overflow-auto">
+              <DialogHeader>
+                <DialogTitle>Select Options</DialogTitle>
+                <DialogDescription>Customise your drink</DialogDescription>
+              </DialogHeader>
+              <OrderPage
                 selectedDrink={formatDrinkName(selectedCoffeeDrink)}
-                addToCart={addToCart} 
-                isDialogOpen={isCoffeeDialogOpen} 
+                addToCart={addToCart}
+                isDialogOpen={isCoffeeDialogOpen}
                 setIsDialogOpen={setIsCoffeeDialogOpen}
               />
-        
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-          </div>
 
+              <DialogFooter className="sm:justify-start">
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Close
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
 
         <div className="wrapper-coffee col-span-1 order-first sm:order-second sm:col-start-2 lg:col-start-4 mx-auto">
           <div className="shadow"></div>
@@ -273,19 +271,6 @@ const DrinksPage = ({addToCart, isDialogOpen, setIsDialogOpen}) => {
           </div>
         </div>
       </div>
-
-      {/* <OrderPage 
-        selectedTea={selectedTeaDrink
-          .replace(/-/g, " ")
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}
-        selectedCoffee={selectedCoffeeDrink.replace(/-/g, " ")
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}
-          addToCart={addToCart}
-      /> */}
     </>
   );
 };
