@@ -1,5 +1,5 @@
 // This is the base path of the Express route we'll define
-const BASE_URL = "http://localhost:3000/users";
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/users';
 
 export async function signUp(userData) {
   // Fetch uses an options object as a second arg to make requests
@@ -291,5 +291,35 @@ export async function placeOrder(token, order) {
     return res.json();
   } else {
     throw new Error("Error placing order");
+  }
+}
+
+
+export async function postProduct(token, product) {
+  // Fetch uses an options object as a second arg to make requests
+  // other than basic GET requests, include data, headers, etc.
+  console.log(product);
+
+  const jsonString = JSON.stringify(product, null, 2);  // Pretty print with 2-space indentation
+
+  console.log(jsonString);
+  
+  const productURL = BASE_URL + "/product";
+  console.log(productURL);
+  const res = await fetch(productURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    // Fetch requires data payloads to be stringified
+    // and assigned to a body property on the options object
+    body: JSON.stringify(product),
+  });
+  // Check if request was successful
+  console.log(res);
+  if (res.ok) {
+    // res.json() will resolve to the JWT
+    // console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error post product");
   }
 }

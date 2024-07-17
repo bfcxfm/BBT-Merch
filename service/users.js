@@ -145,3 +145,17 @@ export async function placeOrder(order){
   console.log("service", res);
   return res;
 }
+
+
+export async function postProduct(product){
+  const token = getToken();
+  const payload = {
+    ...product,
+    ...JSON.parse(atob(token.split(".")[1])).payload,
+  };
+  const res = await usersAPI.postProduct(
+    token, 
+    payload);
+  console.log("service", res);
+  return res;
+}
