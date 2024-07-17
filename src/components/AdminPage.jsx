@@ -169,10 +169,11 @@ export default function Dashboard() {
             <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
               <Link
                 to="/"
+                relative="path"
                 className="flex items-center gap-2 text-lg font-semibold md:text-base"
               >
                 <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only">BBT</span>
               </Link>
               <Link
                 href="#"
@@ -213,11 +214,12 @@ export default function Dashboard() {
               <SheetContent side="left">
                 <nav className="grid gap-6 text-lg font-medium">
                   <Link
-                    href="#"
+                    to="/"
+                    relative="path"
                     className="flex items-center gap-2 text-lg font-semibold"
                   >
                     <Package2 className="h-6 w-6" />
-                    <span className="sr-only">Acme Inc</span>
+                    <span className="sr-only">BBT</span>
                   </Link>
                   <Link href="#" className="hover:text-foreground">
                     Dashboard
