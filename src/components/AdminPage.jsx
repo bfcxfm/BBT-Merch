@@ -13,6 +13,7 @@ import {
   Menu,
   MoreVertical,
   Package2,
+  Receipt,
   Search,
   Truck,
   Users,
@@ -313,6 +314,9 @@ export default function Dashboard() {
                 <CardContent>
                   <div className="text-2xl font-bold">$45,231.89</div>
                   <p className="text-xs text-muted-foreground">
+                    22.1% profit margins
+                  </p>
+                  <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
                 </CardContent>
@@ -320,14 +324,14 @@ export default function Dashboard() {
               <Card x-chunk="dashboard-01-chunk-1">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    New Customers
+                    Total Cost
                   </CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
+                  <Receipt className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
+                  <div className="text-2xl font-bold">$35,222.65</div>
                   <p className="text-xs text-muted-foreground">
-                    +180.1% from last month
+                    +30% from last month
                   </p>
                 </CardContent>
               </Card>
