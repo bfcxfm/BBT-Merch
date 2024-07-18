@@ -182,7 +182,8 @@ export default function Dashboard() {
                 Dashboard
               </Link>
               <Link
-                href="#"
+                to="/admin"
+                relative="path"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Orders
@@ -222,23 +223,30 @@ export default function Dashboard() {
                     <Package2 className="h-6 w-6" />
                     <span className="sr-only">BBT</span>
                   </Link>
-                  <Link href="#" className="hover:text-foreground">
+                  <Link
+                    to="/admin"
+                    relative="path"
+                    className="hover:text-foreground"
+                  >
                     Dashboard
                   </Link>
                   <Link
-                    href="#"
+                    to="/admin"
+                    relative="path"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Orders
                   </Link>
                   <Link
-                    href="#"
+                    to="/admin/product"
+                    relative="path"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Products
                   </Link>
                   <Link
-                    href="#"
+                    to="/admin/users"
+                    relative="path"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Customers
