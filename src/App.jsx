@@ -13,6 +13,7 @@ import UserPage from "./components/UserPage";
 import { getAdmin, getUser } from "../service/users";
 import OrderPage from "./components/OrderPage";
 import CartPage from "./components/CartPage";
+import ProductPage from "./components/ProductPage";
 
 function App() {
   const location = useLocation();
@@ -25,21 +26,20 @@ function App() {
     return admin ? children : <Navigate to="/admin" replace />;
   }
 
-  
   // useEffect(() => {
   //   const fetchedUser = getUser(); // You can replace this with an API call if needed
   //   setUser(fetchedUser);
   // }, []);
 
-  const [isCartOpen, setIsCartOpen] = useState(false);  // State to control the cart sheet
-  const [isDialogOpen, setIsDialogOpen] = useState(false);  // State to control the dialog
+  const [isCartOpen, setIsCartOpen] = useState(false); // State to control the cart sheet
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // State to control the dialog
 
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
     setIsDialogOpen(false); // Close dialog after adding to cart
-    setIsCartOpen(true);    // Open cart sheet
+    setIsCartOpen(true); // Open cart sheet
   };
 
   const updateCartItem = (index, updatedItem) => {
@@ -52,14 +52,21 @@ function App() {
     const newCartItems = cartItems.filter((_, i) => i !== index);
     setCartItems(newCartItems);
   };
-  
 
   return (
     <div className="flex flex-col">
-      {isRootPath && <NavBar isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} cartItems={cartItems}
-                updateCartItem={updateCartItem}
-                removeFromCart={removeFromCart}
-                addToCart={addToCart} setCartItems={setCartItems}/>} {/* Always include NavBar at the top */}
+      {isRootPath && (
+        <NavBar
+          isCartOpen={isCartOpen}
+          setIsCartOpen={setIsCartOpen}
+          cartItems={cartItems}
+          updateCartItem={updateCartItem}
+          removeFromCart={removeFromCart}
+          addToCart={addToCart}
+          setCartItems={setCartItems}
+        />
+      )}{" "}
+      {/* Always include NavBar at the top */}
       <div className="flex flex-1 flex-col">
         <Routes>
           <Route
@@ -67,7 +74,11 @@ function App() {
             element={
               <div className="grid  grid-cols-4 gap-4">
                 <div className="mt-4 col-span-4">
-                  <DrinksPage addToCart={addToCart} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen}/>
+                  <DrinksPage
+                    addToCart={addToCart}
+                    isDialogOpen={isDialogOpen}
+                    setIsDialogOpen={setIsDialogOpen}
+                  />
                 </div>
               </div>
             }
@@ -97,7 +108,7 @@ function App() {
             element={
               <div className="col-span-4">
                 <TooltipProvider>
-                <OrderPage />
+                  <OrderPage />
                 </TooltipProvider>
               </div>
             }
@@ -107,12 +118,12 @@ function App() {
             element={
               <div className="col-span-4">
                 <TooltipProvider>
-                <CartPage 
-                cartItems={cartItems}
-                updateCartItem={updateCartItem}
-                removeFromCart={removeFromCart}
-                addToCart={addToCart}
-              />
+                  <CartPage
+                    cartItems={cartItems}
+                    updateCartItem={updateCartItem}
+                    removeFromCart={removeFromCart}
+                    addToCart={addToCart}
+                  />
                 </TooltipProvider>
               </div>
             }
@@ -120,13 +131,11 @@ function App() {
           <Route
             path="/admin"
             element={
-              
-                <div className="col-span-4">
-                  <TooltipProvider>
-                    <Dashboard />
-                  </TooltipProvider>
-                </div>
-              
+              <div className="col-span-4">
+                <TooltipProvider>
+                  <Dashboard />
+                </TooltipProvider>
+              </div>
             }
           />
           <Route
@@ -135,6 +144,16 @@ function App() {
               <div className="col-span-4">
                 <TooltipProvider>
                   <UserPage />
+                </TooltipProvider>
+              </div>
+            }
+          />
+          <Route
+            path="/admin/product"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                  <ProductPage/>
                 </TooltipProvider>
               </div>
             }
