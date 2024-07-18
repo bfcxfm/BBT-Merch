@@ -188,8 +188,9 @@ export default function Dashboard() {
                 Orders
               </Link>
               <Link
-                href="#"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                to="/admin/product"
+                relative="path"
+                className="text-muted-foreground hover:text-foreground"
               >
                 Products
               </Link>

@@ -145,6 +145,24 @@ export async function placeOrder(order) {
   return res;
 }
 
+export async function updateProductStatus(productId, updateData) {
+  const token = getToken(); // Retrieve the token
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`, // Include the token in the headers
+    },
+    body: JSON.stringify(updateData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to update product status');
+  }
+
+  return await response.json();
+}
+
 export async function postProduct(product) {
   const token = getToken();
   const payload = {
@@ -152,6 +170,5 @@ export async function postProduct(product) {
     ...JSON.parse(atob(token.split(".")[1])).payload,
   };
   const res = await usersAPI.postProduct(token, payload);
-  //console.log("service", res);
   return res;
 }

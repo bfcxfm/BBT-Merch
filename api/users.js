@@ -318,3 +318,20 @@ export async function postProduct(token, product) {
     throw new Error("Error post product");
   }
 }
+
+
+export async function updateProductStatus(productId, updateData) {
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updateData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to update product status');
+  }
+
+  return await response.json();
+}
