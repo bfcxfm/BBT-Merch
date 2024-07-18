@@ -106,9 +106,10 @@ export default function ProductPage() {
     }));
   };
 
+  //handleSaveChanges should probably be integrated with handleproductEdit
   const handleSaveChanges = async () => {
     try {
-      await updateProduct(currentProduct);
+      await handleProductEdit(currentProduct);
       fetchProducts();
       setIsEditModalOpen(false);
     } catch (error) {
@@ -116,7 +117,7 @@ export default function ProductPage() {
     }
   };
 
-  const handleToggleStock = async (productId) => {
+  const handleProductEdit = async (productId) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product._id === productId
@@ -209,7 +210,7 @@ export default function ProductPage() {
                   <TableCell className="text-center w-1/4">{product.category}</TableCell>
                   <TableCell className="text-center w-1/4">
                     <Button
-                      onClick={() => handleToggleStock(product._id)}
+                      onClick={() => handleProductEdit(product._id)}
 
                       className={`h-6 w-6 ${product.inStock ? "bg-green-500" : "bg-red-500"}`}
                     >
