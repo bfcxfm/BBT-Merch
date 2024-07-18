@@ -74,6 +74,7 @@ import { Pagination, PaginationContent, PaginationItem } from "./ui/pagination";
 export default function Dashboard() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [totalRevenue, setTotalRevenue] = useState(0);
 
   //console.log(selectedOrder);
 
@@ -92,6 +93,11 @@ export default function Dashboard() {
       const ordersList = orderData.data;
 
       setOrders(ordersList.reverse());
+
+      // Calculate total revenue from completed orders
+      const completedOrders = ordersList.filter(order => order.status === "completed");
+      const revenue = completedOrders.reduce((acc, order) => acc + (order.total * 0.4), 0);
+setTotalRevenue(revenue); // Update total revenue state
 
       if (!selectedOrder && ordersList.length > 0) {
         setSelectedOrder(ordersList[0]);
@@ -303,7 +309,7 @@ export default function Dashboard() {
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">${totalRevenue.toFixed(2)}</div>
                   <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
