@@ -75,13 +75,13 @@ export default function Dashboard() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [orders, setOrders] = useState([]);
 
-  console.log(selectedOrder);
+  //console.log(selectedOrder);
 
   const [user, setUser] = useState(getUser);
   const [admin, setAdmin] = useState(getAdmin);
   const navigate = useNavigate();
 
-  console.log(user);
+  //console.log(user);
 
   const updateDone = { status: "completed" };
   const updateCancel = { status: "cancelled" };
@@ -106,7 +106,7 @@ export default function Dashboard() {
   async function completeOrder(orderId) {
     try {
       const res = await updateOrderDetails(orderId, updateDone);
-      console.log("complete", res);
+      //console.log("complete",res);
 
       if (!res.success) {
         throw new Error(`Failed to complete order: ${res.statusText}`);
@@ -122,7 +122,7 @@ export default function Dashboard() {
   async function cancellOrder(orderId) {
     try {
       const res = await updateOrderDetails(orderId, updateCancel);
-      console.log("cancel", res);
+      //console.log("cancel",res);
 
       if (!res.success) {
         throw new Error(`Failed to cancel order: ${res.statusText}`);
@@ -149,7 +149,7 @@ export default function Dashboard() {
 
   const handleOrderSelect = (order) => {
     setSelectedOrder(order);
-    console.log(selectedOrder);
+    //console.log(selectedOrder);
   };
 
   const formatDate = (dateString) => {
@@ -169,10 +169,11 @@ export default function Dashboard() {
             <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
               <Link
                 to="/"
+                relative="path"
                 className="flex items-center gap-2 text-lg font-semibold md:text-base"
               >
                 <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only">BBT</span>
               </Link>
               <Link
                 href="#"
@@ -187,7 +188,7 @@ export default function Dashboard() {
                 Orders
               </Link>
               <Link
-                to={admin ? "/admin/product" : "/product"}
+                href="#"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Products
@@ -213,11 +214,12 @@ export default function Dashboard() {
               <SheetContent side="left">
                 <nav className="grid gap-6 text-lg font-medium">
                   <Link
-                    href="#"
+                    to="/"
+                    relative="path"
                     className="flex items-center gap-2 text-lg font-semibold"
                   >
                     <Package2 className="h-6 w-6" />
-                    <span className="sr-only">Acme Inc</span>
+                    <span className="sr-only">BBT</span>
                   </Link>
                   <Link href="#" className="hover:text-foreground">
                     Dashboard
@@ -593,8 +595,8 @@ export default function Dashboard() {
                                 variant="destructive"
                                 className="h-8 gap-1"
                               >
-                                <X className="h-3.5 w-3.5" />
-                                <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
+                                <X className="h-5 w-5" />
+                                <span className="xl:not-sr-only xl:whitespace-nowrap">
                                   Cancel Order
                                 </span>
                               </Button>

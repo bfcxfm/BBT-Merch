@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Trash2, ShoppingBag, Copy, Truck, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -38,15 +38,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getUser, placeOrder } from '../../service/users';
-import { Link } from 'react-router-dom';
+import { getUser, placeOrder } from "../../service/users";
+import { Link } from "react-router-dom";
 
-export default function CartPage({ cartItems, updateCartItem, removeFromCart, isCartOpen, setIsCartOpen, setCartItems}) {
+export default function CartPage({
+  cartItems,
+  updateCartItem,
+  removeFromCart,
+  isCartOpen,
+  setIsCartOpen,
+  setCartItems,
+}) {
   const [total, setTotal] = useState(0);
   const [user, setUser] = useState(getUser);
 
   useEffect(() => {
-    const newTotal = cartItems.reduce((sum, item) => sum + item.totalPrice * item.quantity, 0);
+    const newTotal = cartItems.reduce(
+      (sum, item) => sum + item.totalPrice * item.quantity,
+      0
+    );
     setTotal(newTotal);
   }, [cartItems]);
 
@@ -54,30 +64,29 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
     if (newQuantity >= 1) {
       const updatedItem = { ...cartItems[index], quantity: newQuantity };
       updateCartItem(index, updatedItem);
-      console.log('Cart item:', cartItems);
+      //console.log('Cart item:', cartItems);
     }
   };
 
   const handlePlaceOrder = async () => {
-
     const transformedOrder = {
-      drinks: cartItems.map(item => ({
+      drinks: cartItems.map((item) => ({
         mainProduct: item.mainProduct,
         toppings: item.toppings,
         quantity: item.quantity,
         comment: item.comment,
       })),
       status: "pending",
-      is_paid: true
+      is_paid: true,
     };
-    
+
     try {
       const response = await placeOrder(transformedOrder);
-      console.log('Order placed:', response);
+      //console.log('Order placed:', response);
       setIsCartOpen(false);
       setCartItems([]);
     } catch (error) {
-      console.error('Error placing order:', error);
+      console.error("Error placing order:", error);
       // Handle errors appropriately, e.g., show an error message to the user
     }
   };
@@ -97,29 +106,44 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
               <CardContent className="p-6 text-sm">
                 <div className="grid gap-3">
                   <div className="text-muted-foreground">
-                    <p>Toppings: {item.toppings.map(t => `${t.topping} x ${t.quantity}`).join(', ')}</p>
-                    <p>Sugar: {item.comment.sugar} ({item.comment.sugarLevel})</p>
+                    <p>
+                      Toppings:{" "}
+                      {item.toppings
+                        .map((t) => `${t.topping} x ${t.quantity}`)
+                        .join(", ")}
+                    </p>
+                    <p>
+                      Sugar: {item.comment.sugar} ({item.comment.sugarLevel})
+                    </p>
                     <p>Ice: {item.comment.iceLevel}</p>
-                    {item.comment.content && <p>Note: {item.comment.content}</p>}
+                    {item.comment.content && (
+                      <p>Note: {item.comment.content}</p>
+                    )}
                   </div>
                   <div className="flex items-center">
                     <Button
                       size="icon"
                       variant="outline"
-                      onClick={() => handleQuantityChange(index, item.quantity - 1)}
+                      onClick={() =>
+                        handleQuantityChange(index, item.quantity - 1)
+                      }
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
                     <Input
                       type="number"
                       value={item.quantity}
-                      onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
+                      onChange={(e) =>
+                        handleQuantityChange(index, parseInt(e.target.value))
+                      }
                       className="w-16 mx-2 text-center"
                     />
                     <Button
                       size="icon"
                       variant="outline"
-                      onClick={() => handleQuantityChange(index, item.quantity + 1)}
+                      onClick={() =>
+                        handleQuantityChange(index, item.quantity + 1)
+                      }
                     >
                       <Plus className="h-4 w-4" />
                     </Button>
@@ -143,13 +167,20 @@ export default function CartPage({ cartItems, updateCartItem, removeFromCart, is
             <span className="text-xl font-semibold">Total:</span>
             <span className="text-xl font-bold">${total.toFixed(2)}</span>
           </div>
-          {user? ( 
-                
-          <Button className="w-full mt-4" onClick={handlePlaceOrder}>Proceed to Checkout</Button>):(<Button className="w-full mt-4">
-            <Link to="/login" className="w-full h-full flex items-center justify-center">
-              Please Login to Checkout
-            </Link>
-          </Button>) }
+          {user ? (
+            <Button className="w-full mt-4" onClick={handlePlaceOrder}>
+              Proceed to Checkout
+            </Button>
+          ) : (
+            <Button className="w-full mt-4">
+              <Link
+                to="/login"
+                className="w-full h-full flex items-center justify-center"
+              >
+                Please Login to Checkout
+              </Link>
+            </Button>
+          )}
         </>
       )}
     </div>

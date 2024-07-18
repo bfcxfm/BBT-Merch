@@ -1,5 +1,5 @@
 // This is the base path of the Express route we'll define
-const BASE_URL = "http://localhost:3000/users";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/users";
 
 export async function signUp(userData) {
   // Fetch uses an options object as a second arg to make requests
@@ -25,7 +25,7 @@ export async function getLoginDetails(email) {
   // other than basic GET requests, include data, headers, etc.
   const searchParams = new URLSearchParams({ email: email });
   const getLoginDetailsURL = BASE_URL + "/login?" + searchParams;
-  console.log(getLoginDetailsURL);
+  //console.log(getLoginDetailsURL);
   const res = await fetch(getLoginDetailsURL, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ export async function getLoginDetails(email) {
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Invalid User");
@@ -46,7 +46,7 @@ export async function loginUser(userData) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
   const loginURL = BASE_URL + "/login";
-  console.log(loginURL);
+  //console.log(loginURL);
   const res = await fetch(loginURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -57,7 +57,7 @@ export async function loginUser(userData) {
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Invalid Login");
@@ -68,7 +68,7 @@ export async function storeToken(userData) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
   const createURL = BASE_URL + "/storeToken";
-  console.log(createURL);
+  //console.log(createURL);
   const res = await fetch(createURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -79,7 +79,7 @@ export async function storeToken(userData) {
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Invalid Token");
@@ -90,7 +90,7 @@ export async function logoutUser(token, userData) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
   const logoutURL = BASE_URL + "/logout";
-  console.log(logoutURL);
+  //console.log(logoutURL);
   const res = await fetch(logoutURL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: token },
@@ -101,7 +101,7 @@ export async function logoutUser(token, userData) {
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Invalid Logout");
@@ -112,7 +112,7 @@ export async function checkLogin(token) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
   const loginURL = BASE_URL + "/checklogin";
-  console.log(loginURL);
+  //console.log(loginURL);
   const res = await fetch(loginURL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: token },
@@ -122,7 +122,7 @@ export async function checkLogin(token) {
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Invalid Login");
@@ -132,7 +132,7 @@ export async function checkPermission(token) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
   const loginURL = BASE_URL + "/checkpermission";
-  console.log(loginURL);
+  //console.log(loginURL);
   const res = await fetch(loginURL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: token },
@@ -143,45 +143,44 @@ export async function checkPermission(token) {
   // Check if request was successful
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Invalid Login");
   }
 }
 
-export async function getOrderDetails(token,userData) {
+export async function getOrderDetails(token, userData) {
   // Define the URL for fetching order details
   const orderURL = BASE_URL + "/order";
-  console.log(orderURL);
+  //console.log(orderURL);
 
   // Perform the fetch request
   const res = await fetch(orderURL, {
     method: "POST",
-    headers: { 
-      "Content-Type": "application/json", 
-      "Authorization": token 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
     },
     body: JSON.stringify(userData),
   });
 
   // Check if request was successful
   if (res.ok) {
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Error fetching order details");
   }
 }
 
-
 export async function updateOrderDetails(token, orderId, updateOrder) {
   // Define the URL for updating order details
-   const updateURL = BASE_URL + "/order/" + orderId;
-   console.log(updateURL);
-   console.log("update",updateOrder);
+  const updateURL = BASE_URL + "/order/" + orderId;
+  //console.log(updateURL);
+  //console.log("update",updateOrder);
 
-   const res = await fetch(updateURL, {
+  const res = await fetch(updateURL, {
     method: "PATCH",
     headers: { "Content-Type": "application/json", Authorization: token },
     // Fetch requires data payloads to be stringified
@@ -190,45 +189,43 @@ export async function updateOrderDetails(token, orderId, updateOrder) {
   });
   if (res.ok) {
     // res.json() will resolve to the JWT
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Error updating order details");
   }
 }
 
-
-
 export async function getAllOrderDetails(token, userData) {
   // Define the URL for fetching order details
   const orderURL = BASE_URL + "/orders";
-  console.log(orderURL);
-  console.log(token);
+  //console.log(orderURL);
+  //console.log(token);
 
   // Perform the fetch request
   const res = await fetch(orderURL, {
     method: "POST",
-    headers: { 
-      "Content-Type": "application/json", 
-      "Authorization": token 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
     },
     body: JSON.stringify(userData),
   });
 
   // Check if request was successful
   if (res.ok) {
-    console.log(res);
+    //console.log(res);
     return res.json();
   } else {
     throw new Error("Error fetching order details");
   }
 }
 
-
-
 export async function getProductPrice(productName) {
-  const productURL = `${BASE_URL}/product?name=${encodeURIComponent(productName)}`;
-  console.log(productURL);
+  const productURL = `${BASE_URL}/product?name=${encodeURIComponent(
+    productName
+  )}`;
+  //console.log(productURL);
 
   const res = await fetch(productURL, {
     method: "GET",
@@ -237,11 +234,10 @@ export async function getProductPrice(productName) {
 
   if (res.ok) {
     const data = await res.json();
-    console.log("api",data);
-    const price= data.data.price;
-    console.log("api price",price);
+    //console.log("api",data);
+    const price = data.data.price;
+    //console.log("api price",price);
     return price;
-    
   } else {
     throw new Error(`Error fetching price for product: ${productName}`);
   }
@@ -249,7 +245,7 @@ export async function getProductPrice(productName) {
 
 export async function getAllProduct() {
   const productsURL = `${BASE_URL}/products`;
-  console.log(productsURL);
+  //console.log(productsURL);
 
   const res = await fetch(productsURL, {
     method: "GET",
@@ -258,7 +254,7 @@ export async function getAllProduct() {
 
   if (res.ok) {
     const data = await res.json();
-    console.log(data);
+    //console.log(data);
     return data;
   } else {
     throw new Error("Error fetching all product prices");
@@ -268,14 +264,14 @@ export async function getAllProduct() {
 export async function placeOrder(token, order) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
-  console.log(order);
+  //console.log(order);
 
-  const jsonString = JSON.stringify(order, null, 2);  // Pretty print with 2-space indentation
+  const jsonString = JSON.stringify(order, null, 2); // Pretty print with 2-space indentation
 
-  console.log(jsonString);
-  
+  //console.log(jsonString);
+
   const orderURL = BASE_URL + "/neworder";
-  console.log(orderURL);
+  //console.log(orderURL);
   const res = await fetch(orderURL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: token },
@@ -284,12 +280,41 @@ export async function placeOrder(token, order) {
     body: JSON.stringify(order),
   });
   // Check if request was successful
-  console.log(res);
+  //console.log(res);
   if (res.ok) {
     // res.json() will resolve to the JWT
     // console.log(res);
     return res.json();
   } else {
     throw new Error("Error placing order");
+  }
+}
+
+export async function postProduct(token, product) {
+  // Fetch uses an options object as a second arg to make requests
+  // other than basic GET requests, include data, headers, etc.
+  //console.log(product);
+
+  const jsonString = JSON.stringify(product, null, 2); // Pretty print with 2-space indentation
+
+  //console.log(jsonString);
+
+  const productURL = BASE_URL + "/product";
+  //console.log(productURL);
+  const res = await fetch(productURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    // Fetch requires data payloads to be stringified
+    // and assigned to a body property on the options object
+    body: JSON.stringify(product),
+  });
+  // Check if request was successful
+  //console.log(res);
+  if (res.ok) {
+    // res.json() will resolve to the JWT
+    // console.log(res);
+    return res.json();
+  } else {
+    throw new Error("Error post product");
   }
 }
