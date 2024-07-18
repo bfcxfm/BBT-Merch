@@ -151,10 +151,10 @@ export async function updateProduct(productId, updateData) {
     ...updateData,
     ...JSON.parse(atob(token.split(".")[1])).payload,
   };
-  console.log("payload", payload);
+  // console.log("payload", payload);
   const response = await usersAPI.updateProduct(token, productId, payload);
 
-  console.log("response", response);
+  // console.log("response", response);
 
   return response;
 }
