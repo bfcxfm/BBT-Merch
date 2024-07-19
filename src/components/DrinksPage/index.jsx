@@ -120,7 +120,7 @@ const DrinksPage = ({ addToCart, isDialogOpen, setIsDialogOpen }) => {
   return (
     <>
       <div className=" drinks-page tea-bg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mx-auto pb-4 pt-4 items-center justify-center dark:bg-gray-800">
-        <div className="wrapper-tea col-span-1 sm:col-start-1 lg:col-start-2 p-4 mx-auto ">
+        <div className="wrapper-tea col-span-1 sm:col-start-1 lg:col-start-2 p-4 mx-auto bg-gradient-to-r from-fdfbf7 to-fdfbf7 dark:bg-gray-800">
           <div className="shadow"></div>
           <div className="title capitalize">
             {selectedTeaDrink.replace(/-/g, " ")}
@@ -201,8 +201,8 @@ const DrinksPage = ({ addToCart, isDialogOpen, setIsDialogOpen }) => {
               onClick={() => {
                 setSelectedCoffeeDrink(formatOption(option));
               }}
-              className={`cursor-pointer py-2 ${
-                formatOption(option) === selectedCoffeeDrink ? "selected" : ""
+              className={`cursor-pointer py-2  ${
+                formatOption(option) === selectedCoffeeDrink ? "selected " : ""
               }`}
             >
               {option}
@@ -244,7 +244,7 @@ const DrinksPage = ({ addToCart, isDialogOpen, setIsDialogOpen }) => {
           </Dialog>
         </div>
 
-        <div className="wrapper-coffee col-span-1 order-first sm:order-second sm:col-start-2 lg:col-start-4 mx-auto">
+        <div className="wrapper-coffee col-span-1 order-first sm:order-second sm:col-start-2 lg:col-start-4 mx-auto bg-gradient-to-r from-f9f6f0 to-f9f6f0 dark:bg-gray-700">
           <div className="shadow"></div>
           <div className="title capitalize">
             {selectedCoffeeDrink.replace(/-/g, " ")}

@@ -13,6 +13,7 @@ import {
   Menu,
   MoreVertical,
   Package2,
+  Receipt,
   Search,
   Truck,
   Users,
@@ -188,7 +189,8 @@ setTotalRevenue(revenue); // Update total revenue state
                 Dashboard
               </Link>
               <Link
-                href="#"
+                to="/admin"
+                relative="path"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Orders
@@ -228,23 +230,30 @@ setTotalRevenue(revenue); // Update total revenue state
                     <Package2 className="h-6 w-6" />
                     <span className="sr-only">BBT</span>
                   </Link>
-                  <Link href="#" className="hover:text-foreground">
+                  <Link
+                    to="/admin"
+                    relative="path"
+                    className="hover:text-foreground"
+                  >
                     Dashboard
                   </Link>
                   <Link
-                    href="#"
+                    to="/admin"
+                    relative="path"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Orders
                   </Link>
                   <Link
-                    href="#"
+                    to="/admin/product"
+                    relative="path"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Products
                   </Link>
                   <Link
-                    href="#"
+                    to="/admin/users"
+                    relative="path"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Customers
@@ -312,6 +321,9 @@ setTotalRevenue(revenue); // Update total revenue state
                 <CardContent>
                   <div className="text-2xl font-bold">${totalRevenue.toFixed(2)}</div>
                   <p className="text-xs text-muted-foreground">
+                    22.1% profit margins
+                  </p>
+                  <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
                 </CardContent>
@@ -319,14 +331,14 @@ setTotalRevenue(revenue); // Update total revenue state
               <Card x-chunk="dashboard-01-chunk-1">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    New Customers
+                    Total Cost
                   </CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
+                  <Receipt className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
+                  <div className="text-2xl font-bold">$35,222.65</div>
                   <p className="text-xs text-muted-foreground">
-                    +180.1% from last month
+                    +30% from last month
                   </p>
                 </CardContent>
               </Card>

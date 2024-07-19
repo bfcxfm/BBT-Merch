@@ -70,7 +70,7 @@
   /* Style for the selected option */
   .options-tea .selected {
     /* background: rgba(255, 255, 255, 0.3);  */
-    color: #000000; /* White color for selected text */
+    color: #000000;
     text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3); /* Add 45-degree text shadow */
   }
 
@@ -125,7 +125,7 @@
   /* Style for the selected option */
   .options-coffee .selected {
     /* background: rgba(255, 255, 255, 0.3);  */
-    color: #000000; /* White color for selected text */
+    color: #000000;
     text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3); /* Add 45-degree text shadow */
   }
 
@@ -136,7 +136,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, #fdfbf7, #fdfbf7);
+    /* background: linear-gradient(45deg, #fdfbf7, #fdfbf7); */
     /* box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15); */
     border-radius: 15px;
     transform: translateY(-5px);
@@ -176,7 +176,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, #f9f6f0, #f9f6f0);
+    /* background: linear-gradient(45deg, #f9f6f0, #f9f6f0); */
     /* box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15); */
     border-radius: 15px;
     transform: translateY(-5px);
@@ -255,7 +255,7 @@
     bottom: 7%;
     margin: auto;
     display: flex;
-    color: rgba(51, 51, 51, 1);
+    /* color: rgba(51, 51, 51, 1); */
     text-align: center;
 
     font-size: 20px;

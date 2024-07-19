@@ -319,19 +319,23 @@ export async function postProduct(token, product) {
   }
 }
 
-
-export async function updateProductStatus(productId, updateData) {
+export async function updateProduct(token, productId, updateData) {
   const response = await fetch(`${BASE_URL}/products/${productId}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: token,
     },
     body: JSON.stringify(updateData),
   });
 
-  if (!response.ok) {
-    throw new Error('Failed to update product status');
-  }
+  // console.log("api", response);
 
-  return await response.json();
+  if (response.ok) {
+    // res.json() will resolve to the JWT
+    // console.log(res);
+    return response.json();
+  } else {
+    throw new Error("Failed to update product");
+  }
 }
