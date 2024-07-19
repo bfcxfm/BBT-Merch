@@ -339,3 +339,21 @@ export async function updateProduct(token, productId, updateData) {
     throw new Error("Failed to update product");
   }
 }
+
+export async function getAllUsers() {
+  const usersURL = `${BASE_URL}/users`;
+  //console.log(usersURL);
+
+  const res = await fetch(usersURL, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    //console.log(data);
+    return data;
+  } else {
+    throw new Error("Error fetching all users");
+  }
+}

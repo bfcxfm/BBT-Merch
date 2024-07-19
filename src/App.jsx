@@ -14,6 +14,7 @@ import { getAdmin, getUser } from "../service/users";
 import OrderPage from "./components/OrderPage";
 import CartPage from "./components/CartPage";
 import ProductPage from "./components/ProductPage";
+import AdminUserPage from "./components/AdminUserPage"; 
 
 function App() {
   const location = useLocation();
@@ -154,6 +155,16 @@ function App() {
               <div className="col-span-4">
                 <TooltipProvider>
                   <ProductPage/>
+                </TooltipProvider>
+              </div>
+            }
+          />
+          <Route
+            path="/admin/user"
+            element={
+              <div className="col-span-4">
+                <TooltipProvider>
+                  <AdminUserPage/>
                 </TooltipProvider>
               </div>
             }

@@ -64,16 +64,16 @@ import { useEffect, useState } from "react";
 import { postProduct } from "../../api/users";
 import {
   getUser,
-  getAllUsers,
-  updateUserStatus,
   logoutUser,
+  getAllOrderDetails,
+  updateOrderDetails,
   getAdmin,
+  getAllProduct,
 } from "../../service/users";
 import { Separator } from "./ui/separator";
 import { Pagination, PaginationContent, PaginationItem } from "./ui/pagination";
-import { updateProductStatus } from "../../api/users";
 
-export default function UserPage() {
+export default function AdminUserPage() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false); // Assuming there's a way to determine if the user is an admin
@@ -89,7 +89,7 @@ export default function UserPage() {
 
   async function fetchUsers() {
     try {
-      const userData = await getAllUsers(); // Assuming getAllUsers() fetches all users
+      const userData = await getAllUsers();
       setUsers(userData.data);
     } catch (error) {
       console.error("Error fetching users", error);

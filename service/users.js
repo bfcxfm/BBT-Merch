@@ -49,6 +49,13 @@ export function getUser() {
   return token ? JSON.parse(atob(token.split(".")[1])).payload.user : null;
 }
 
+export async function getAllUsers() {
+  // Delegate the network request code to the users-api.js API module
+  const res = await usersAPI.getAllUsers();
+  // Baby step by returning whatever is sent back by the server
+  return res;
+}
+
 export function getAdmin() {
   const token = getToken();
   // If there's a token, return the user in the payload, otherwise return null
@@ -167,4 +174,15 @@ export async function postProduct(product) {
   };
   const res = await usersAPI.postProduct(token, payload);
   return res;
+}
+
+export async function updateUserStatus(userId, status) {
+  const token = getToken(); // Retrieve the token
+  const payload = {
+    status,
+    ...JSON.parse(atob(token.split(".")[1])).payload,
+  };
+  const response = await usersAPI.updateUserStatus(token, userId, payload);
+
+  return response;
 }
