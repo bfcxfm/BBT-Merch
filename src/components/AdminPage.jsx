@@ -298,6 +298,7 @@ setTotalRevenue(revenue); // Update total revenue state
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
+            <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4 ">ADMIN</div>
           </header>
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">

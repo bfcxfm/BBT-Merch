@@ -53,3 +53,18 @@
 
   /* background: linear-gradient(180deg,#f9f6f0, #fdfbf7); */
 }
+
+
+/* Add this to your CSS file */
+.construction-tape-border {
+  position: sticky; /* or use position: sticky; */
+  z-index: 1000; /* Ensure it stays on top */
+  border: 10px solid;
+  border-image: repeating-linear-gradient(
+      45deg,
+      yellow,
+      yellow 10px,
+      black 10px,
+      black 20px
+  ) 10;
+}
