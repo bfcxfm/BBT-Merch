@@ -344,52 +344,47 @@ export default function ProductPage() {
             </div>
           </header>
           <main className="flex-1 p-4">
-            <h2 className="text-xl font-semibold py-2">Products</h2>
-            <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:mt-4 xl:grid-cols-3">
-              {products.map((product, index) => (
-                <Card key={index} className="xl:col-span-1">
-                  <CardHeader className="flex flex-row items-center">
-                    <div className="grid gap-2">
-                      <CardTitle>{product.name}</CardTitle>
-                      <CardDescription>{product.category}</CardDescription>
-                    </div>
-                    <Button asChild size="sm" className="ml-auto gap-1">
-                      <Link to="#" onClick={() => handleEditClick(product)}>
-                        Edit
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </CardHeader>
-                  <CardContent>
-                    <Table>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell className="font-medium">Price</TableCell>
-                          <TableCell>${product.price.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            In Stock
-                          </TableCell>
-                          <TableCell>
-                            <Badge
-                              variant="outline"
-                              onClick={() => handleProductEdit(product._id)}
-                              className={`cursor-pointer ${
-                                product.inStock ? "bg-green-500" : "bg-red-500"
-                              }`}
-                            >
-                              {product.inStock ? "Yes" : "No"}
-                            </Badge>
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </main>
+  <h2 className="text-xl font-semibold py-2">Products</h2>
+  <div className="overflow-x-auto">
+    <table className="min-w-full bg-white">
+      <thead>
+        <tr>
+          <th className="py-2 px-4 border-b">Name</th>
+          <th className="py-2 px-4 border-b">Category</th>
+          <th className="py-2 px-4 border-b">Price</th>
+          <th className="py-2 px-4 border-b">In Stock</th>
+          <th className="py-2 px-4 border-b">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product, index) => (
+          <tr key={index}>
+            <td className="py-2 px-4 border-b">{product.name}</td>
+            <td className="py-2 px-4 border-b">{product.category}</td>
+            <td className="py-2 px-4 border-b">${product.price !== undefined && product.price !== null ? product.price.toFixed(2) : '0.00'}</td>
+            <td className="py-2 px-4 border-b">
+              <Badge
+                variant="outline"
+                onClick={() => handleProductEdit(product._id)}
+                className={`cursor-pointer ${product.inStock ? "bg-green-500" : "bg-red-500"}`}
+              >
+                {product.inStock ? "Yes" : "No"}
+              </Badge>
+            </td>
+            <td className="py-2 px-4 border-b">
+              <Button asChild size="sm" className="gap-1">
+                <Link to="#" onClick={() => handleEditClick(product)}>
+                  Edit
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</main>
         </div>
       )}
 
