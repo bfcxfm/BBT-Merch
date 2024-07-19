@@ -112,6 +112,7 @@ export default function NavBar({
   const handleLogout = () => {
     logoutUser()
       .then(() => {
+        setAdmin(getAdmin());
         setUser(getUser()); // Update state after logout is complete
       })
       .catch((error) => {
