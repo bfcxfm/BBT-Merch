@@ -435,6 +435,7 @@ export default function ProductPage() {
                   </Button>
                 </DialogClose>
                 <Button onClick={handleSaveChanges}>Save</Button>
+                <Button variant="danger" onClick={handleDeleteProduct} className="ml-2">Delete</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
