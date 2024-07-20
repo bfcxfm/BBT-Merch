@@ -55,7 +55,7 @@ This separation allows for independent development and scaling of the frontend a
 
 ## Animations
 
-![image](public/animation.gif)
+<img src="public/animation.gif" width="300">
 
 ## Responsive Design
 
@@ -65,7 +65,7 @@ Our application is built with a mobile-first approach, ensuring a seamless exper
 - **Tablet**: Adaptive design that adjusts to medium-sized screens.
 - **Mobile**: Streamlined interface for easy navigation and interaction on smaller screens.
 
-![image](public/darkmode.png)
+<img src="public/darkmode.png" width="300">
 
 ## Dark Mode
 
@@ -75,7 +75,7 @@ The application supports system-based dark mode:
 - Carefully designed color palette for both modes to ensure readability and reduce eye strain.
 - Consistent styling across all components in both light and dark modes.
 
-![image](public/admin-dark.png)
+<img src="public/admin-dark.png" width="300">
 
 ```mermaid
 erDiagram
@@ -229,6 +229,103 @@ erDiagram
     USER ||--|| LOGIN : performs
     PUBLICUSER ||--|| REGISTER : performs
 
+
+```
+
+```mermaid
+flowchart TB
+    subgraph HomePage [Home Page for PublicUser]
+        H0[Homepage]
+        H1[View Products]
+        H2[Select Product]
+        H3[Add to Cart]
+        H4[Login]
+        H5[Register]
+        H6[Login/Register to Order]
+
+        H0 --> H1
+        H1 --> H2
+        H2 --> H3
+        H3 --> H6
+        H0 --> H4
+        H4 --> H6
+        H0 --> H5
+        H5 --> H6
+    end
+
+    subgraph AdminPage [Admin Page]
+        AP1[Admin Dashboard]
+        AP2[View/Edit Products]
+        AP3[View/Edit Users]
+        AP4[View/Edit Orders]
+
+        AP1 --> AP2
+        AP1 --> AP3
+        AP1 --> AP4
+
+        subgraph ProductPage [Product Page for Admin Editing]
+            PP1[Product List]
+            PP2[Edit Product Details]
+            PP3[Save Changes]
+
+            PP1 --> PP2
+            PP2 --> PP3
+        end
+
+        subgraph UserInfoPage [User Info Page for Admin Editing]
+            UIP1[User List]
+            UIP2[Edit User Details]
+            UIP3[Save Changes]
+
+            UIP1 --> UIP2
+            UIP2 --> UIP3
+        end
+
+        subgraph OrderPageAdmin [Order Page for Admin Editing]
+            OPA1[Order List]
+            OPA2[Edit Order Details]
+            OPA3[Save Changes]
+
+            OPA1 --> OPA2
+            OPA2 --> OPA3
+        end
+
+        AP2 --> ProductPage
+        AP3 --> UserInfoPage
+        AP4 --> OrderPageAdmin
+    end
+
+    subgraph UserPage [User Page]
+        UP1[User Dashboard]
+        UP2[View Orders]
+        UP3[Place New Order]
+        UP4[Leave Comments]
+
+        UP1 --> UP2
+        UP1 --> UP3
+        UP1 --> UP4
+
+        subgraph OrderPageUser [Order Page for User]
+            OPU1[Order List]
+            OPU2[Choose Shipping/Pickup]
+            OPU3[Complete Order]
+
+            OPU1 --> OPU2
+            OPU2 --> OPU3
+        end
+
+        subgraph CommentPage [Comment Page for User]
+            CP1[View Products]
+            CP2[Add Comment]
+            CP3[Submit Comment]
+
+            CP1 --> CP2
+            CP2 --> CP3
+        end
+
+        UP2 --> OrderPageUser
+        UP4 --> CommentPage
+    end
 
 ```
 
