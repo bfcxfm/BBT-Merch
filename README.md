@@ -1,6 +1,6 @@
 # Bubble Tea Merchandise Ecommerce System
 
-A full-stack MERN (MongoDB, Express, React, Node.js) ecommerce platform for bubble tea merchandise, featuring a user-friendly shopping experience and an admin portal for order management.
+A full-stack MERN (MongoDB, Express, React, Node.js) ecommerce platform for bubble tea merchandise, featuring a user-friendly shopping experience and an admin portal for order and cost management.
 
 ## Live Website
 
@@ -434,7 +434,7 @@ This configuration serves the frontend from the `/dist` directory and proxies AP
   - Sugar level
   - Ice level
   - Additional toppings
-    -comments
+  - Comments
 
 ### Admin Product Management
 
@@ -444,7 +444,7 @@ This configuration serves the frontend from the `/dist` directory and proxies AP
   - Customization options
   - Revenue, cost and user management
 
-# Future Features
+## Future Features
 
 Here are some exciting features we plan to implement in the near future:
 
@@ -462,7 +462,7 @@ Here are some exciting features we plan to implement in the near future:
 
 ### Expanded Customization Options
 
-- **Broader Ingredient Selection**: Introduce a wider range of toppings, syrups, and tea bases for even more personalized drinks.
+- **Broader Ingredient Selection**: Introduce a wider range of toppings, syrups, and tea/coffee bases for even more personalized drinks.
 
 ### Sustainability Features
 
@@ -472,6 +472,7 @@ Here are some exciting features we plan to implement in the near future:
 ### Advanced User Profiles
 
 - **Favorite Orders**: Enable users to save and quickly reorder their favorite drink combinations.
+- **Awards System**: Enable users to earn/redeem awards and points.
 - **Personalized Recommendations**: Implement an AI-driven system to suggest new drinks based on user preferences and order history.
 
 ## License
