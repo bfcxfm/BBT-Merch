@@ -412,7 +412,7 @@ This configuration serves the frontend from the `/dist` directory and proxies AP
    npm run dev
    ```
 
-5. Run the development build on server:
+5. Build on cloud:
 
    ```
    npm run build
