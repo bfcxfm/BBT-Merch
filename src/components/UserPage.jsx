@@ -125,126 +125,132 @@ export default function UserPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-          <Link
-            to="/"
-            relative="path"
-            className="flex items-center gap-2 text-lg font-semibold md:text-base"
-          >
-            <Package2 className="h-6 w-6" />
-            <span className="sr-only">BBT</span>
-          </Link>
-          <Link
-            href="#"
-            className="text-foreground transition-colors hover:text-foreground"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Orders
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Payment
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Settings
-          </Link>
-        </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="shrink-0 md:hidden"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <nav className="grid gap-6 text-lg font-medium">
+    <>
+      {user && (
+        <div className="flex min-h-screen w-full flex-col">
+          <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+            <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
               <Link
                 to="/"
                 relative="path"
-                className="flex items-center gap-2 text-lg font-semibold"
+                className="flex items-center gap-2 text-lg font-semibold md:text-base"
               >
                 <Package2 className="h-6 w-6" />
                 <span className="sr-only">BBT</span>
               </Link>
-              <Link href="#" className="hover:text-foreground">
+              <Link
+                href="#"
+                className="text-foreground transition-colors hover:text-foreground"
+              >
                 Dashboard
               </Link>
               <Link
                 href="#"
-                className="text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Orders
+              </Link>
+              <Link
+                href="#"
+                className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Payment
               </Link>
               <Link
                 href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Products
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Settings
               </Link>
             </nav>
-          </SheetContent>
-        </Sheet>
-        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search orders..."
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-              />
-            </div>
-          </form>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                {user ? (
-                  <button onClick={handleLogout}>Logout</button>
-                ) : (
-                  <Link to="/login" relative="path">
-                    Login
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0 md:hidden"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <nav className="grid gap-6 text-lg font-medium">
+                  <Link
+                    to="/"
+                    relative="path"
+                    className="flex items-center gap-2 text-lg font-semibold"
+                  >
+                    <Package2 className="h-6 w-6" />
+                    <span className="sr-only">BBT</span>
                   </Link>
-                )}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-      <main className="flex flex-1 flex-col items-center gap-4 px-4 py-4 md:gap-8 md:p-8">
-        {/* <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                  <Link href="#" className="hover:text-foreground">
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Payment
+                  </Link>
+                  <Link
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Settings
+                  </Link>
+                </nav>
+              </SheetContent>
+            </Sheet>
+            <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+              <form className="ml-auto flex-1 sm:flex-initial">
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder="Search orders..."
+                    className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                  />
+                </div>
+              </form>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full"
+                  >
+                    <CircleUser className="h-5 w-5" />
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem>Support</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    {user ? (
+                      <button onClick={handleLogout}>Logout</button>
+                    ) : (
+                      <Link to="/login" relative="path">
+                        Login
+                      </Link>
+                    )}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </header>
+          <main className="flex flex-1 flex-col items-center gap-4 px-4 py-4 md:gap-8 md:p-8">
+            {/* <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
           <Card x-chunk="dashboard-01-chunk-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -298,67 +304,67 @@ export default function UserPage() {
             </CardContent>
           </Card>
         </div> */}
-        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:mt-4 xl:grid-cols-3">
-          <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-            <CardHeader className="flex flex-row items-center">
-              <div className="grid gap-2">
-                <CardTitle>Transactions</CardTitle>
-                <CardDescription>Recent transactions.</CardDescription>
-              </div>
-              <Button asChild size="sm" className="ml-auto gap-1">
-                <Link href="#">
-                  View All
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Order</TableHead>
-                    <TableHead className="hidden xl:table-column">
-                      Type
-                    </TableHead>
-                    <TableHead className="hidden xl:table-column">
-                      Status
-                    </TableHead>
-                    <TableHead className="hidden xl:table-column">
-                      Date
-                    </TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {orders.map((order, index) => (
-                    <TableRow
-                      key={index}
-                      onClick={() => handleOrderSelect(order)}
-                    >
-                      <TableCell>
-                        <div className="font-medium ">{order.orderID}</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">
-                          {order.status}
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden xl:table-column">
-                        Sale
-                      </TableCell>
-                      <TableCell className="hidden xl:table-column">
-                        <Badge className="text-xs" variant="outline">
-                          {order.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                        {formatDate(order.createdAt)}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        ${order.total.toFixed(2)}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+            <div className="grid gap-4 md:gap-8 lg:grid-cols-2 lg:mt-4 xl:grid-cols-3">
+              <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
+                <CardHeader className="flex flex-row items-center">
+                  <div className="grid gap-2">
+                    <CardTitle>Transactions</CardTitle>
+                    <CardDescription>Recent transactions.</CardDescription>
+                  </div>
+                  <Button asChild size="sm" className="ml-auto gap-1">
+                    <Link href="#">
+                      View All
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Order</TableHead>
+                        <TableHead className="hidden xl:table-column">
+                          Type
+                        </TableHead>
+                        <TableHead className="hidden xl:table-column">
+                          Status
+                        </TableHead>
+                        <TableHead className="hidden xl:table-column">
+                          Date
+                        </TableHead>
+                        <TableHead className="text-right">Amount</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {orders.map((order, index) => (
+                        <TableRow
+                          key={index}
+                          onClick={() => handleOrderSelect(order)}
+                        >
+                          <TableCell>
+                            <div className="font-medium ">{order.orderID}</div>
+                            <div className="hidden text-sm text-muted-foreground md:inline">
+                              {order.status}
+                            </div>
+                          </TableCell>
+                          <TableCell className="hidden xl:table-column">
+                            Sale
+                          </TableCell>
+                          <TableCell className="hidden xl:table-column">
+                            <Badge className="text-xs" variant="outline">
+                              {order.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
+                            {formatDate(order.createdAt)}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            ${order.total.toFixed(2)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
 
-                  {/* <TableRow>
+                      {/* <TableRow>
                     <TableCell>
                       <div className="font-medium">Liam Johnson</div>
                       <div className="hidden text-sm text-muted-foreground md:inline">
@@ -458,112 +464,116 @@ export default function UserPage() {
                     </TableCell>
                     <TableCell className="text-right">$550.00</TableCell>
                   </TableRow> */}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-          {selectedOrder && (
-            <Card x-chunk="dashboard-01-chunk-5">
-              <CardHeader className="flex flex-row items-start bg-muted/50">
-                <div className="grid gap-0.5">
-                  <CardTitle className="group flex items-center gap-2 text-lg">
-                    Order {selectedOrder && selectedOrder.orderID}
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
-                    >
-                      <Copy className="h-3 w-3" />
-                      <span className="sr-only">Copy Order ID</span>
-                    </Button>
-                  </CardTitle>
-                  <CardDescription>
-                    Date: {formatDate(selectedOrder.createdAt)}
-                    <div className="font-semibold bg-black text-white mx-auto w-auto rounded-md">
-                      {selectedOrder.status}
-                    </div>
-                  </CardDescription>
-                </div>
-                <div className="ml-auto flex items-center gap-1">
-                  <Button size="sm" variant="outline" className="h-8 gap-1">
-                    <Truck className="h-3.5 w-3.5" />
-                    <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
-                      Track Order
-                    </span>
-                  </Button>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="outline" className="h-8 w-8">
-                        <MoreVertical className="h-3.5 w-3.5" />
-                        <span className="sr-only">More</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Export</DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Trash</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </CardHeader>
-
-              <CardContent className="p-6 text-sm">
-                <div className="grid gap-3">
-                  <div className="font-semibold">Order Details</div>
-                  <ul className="grid gap-3">
-                    {selectedOrder.drinks.map((drink, index) => (
-                      <li className="flex flex-col gap-1" key={index}>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">
-                            {drink.mainProduct.name} x{" "}
-                            <span>{drink.quantity}</span>
-                          </span>
-                          <span>${drink.mainProduct.price.toFixed(2)}</span>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+              {selectedOrder && (
+                <Card x-chunk="dashboard-01-chunk-5">
+                  <CardHeader className="flex flex-row items-start bg-muted/50">
+                    <div className="grid gap-0.5">
+                      <CardTitle className="group flex items-center gap-2 text-lg">
+                        Order {selectedOrder && selectedOrder.orderID}
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
+                        >
+                          <Copy className="h-3 w-3" />
+                          <span className="sr-only">Copy Order ID</span>
+                        </Button>
+                      </CardTitle>
+                      <CardDescription>
+                        Date: {formatDate(selectedOrder.createdAt)}
+                        <div className="font-semibold bg-black text-white mx-auto w-auto rounded-md">
+                          {selectedOrder.status}
                         </div>
-                        {drink.toppings &&
-                          drink.toppings.map((topping, tIndex) => (
-                            <div
-                              className="flex items-center justify-between pl-4"
-                              key={tIndex}
-                            >
+                      </CardDescription>
+                    </div>
+                    <div className="ml-auto flex items-center gap-1">
+                      <Button size="sm" variant="outline" className="h-8 gap-1">
+                        <Truck className="h-3.5 w-3.5" />
+                        <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
+                          Track Order
+                        </span>
+                      </Button>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-8 w-8"
+                          >
+                            <MoreVertical className="h-3.5 w-3.5" />
+                            <span className="sr-only">More</span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Export</DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem>Trash</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="p-6 text-sm">
+                    <div className="grid gap-3">
+                      <div className="font-semibold">Order Details</div>
+                      <ul className="grid gap-3">
+                        {selectedOrder.drinks.map((drink, index) => (
+                          <li className="flex flex-col gap-1" key={index}>
+                            <div className="flex items-center justify-between">
                               <span className="text-muted-foreground">
-                                {topping.topping.name} x{" "}
-                                <span>{topping.quantity}</span>
+                                {drink.mainProduct.name} x{" "}
+                                <span>{drink.quantity}</span>
                               </span>
-                              <span>
-                                $
-                                {(
-                                  topping.topping.price * topping.quantity
-                                ).toFixed(2)}
-                              </span>
+                              <span>${drink.mainProduct.price.toFixed(2)}</span>
                             </div>
-                          ))}
-                        {drink.comment &&
-                          drink.comment.map((comment, cIndex) => (
-                            <div
-                              key={cIndex}
-                              className="flex flex-col gap-1 mt-2 pl-4"
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className="text-muted-foreground">
-                                  Sugar
-                                </span>
-                                <span>{comment.sugar}</span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-muted-foreground">
-                                  Sugar Level
-                                </span>
-                                <span>{comment.sugarLevel}</span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-muted-foreground">
-                                  Ice Level
-                                </span>
-                                <span>{comment.iceLevel}</span>
-                              </div>
-                              {/* <div className="flex items-center justify-between">
+                            {drink.toppings &&
+                              drink.toppings.map((topping, tIndex) => (
+                                <div
+                                  className="flex items-center justify-between pl-4"
+                                  key={tIndex}
+                                >
+                                  <span className="text-muted-foreground">
+                                    {topping.topping.name} x{" "}
+                                    <span>{topping.quantity}</span>
+                                  </span>
+                                  <span>
+                                    $
+                                    {(
+                                      topping.topping.price * topping.quantity
+                                    ).toFixed(2)}
+                                  </span>
+                                </div>
+                              ))}
+                            {drink.comment &&
+                              drink.comment.map((comment, cIndex) => (
+                                <div
+                                  key={cIndex}
+                                  className="flex flex-col gap-1 mt-2 pl-4"
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">
+                                      Sugar
+                                    </span>
+                                    <span>{comment.sugar}</span>
+                                  </div>
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">
+                                      Sugar Level
+                                    </span>
+                                    <span>{comment.sugarLevel}</span>
+                                  </div>
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">
+                                      Ice Level
+                                    </span>
+                                    <span>{comment.iceLevel}</span>
+                                  </div>
+                                  {/* <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">Rating</span>
                         <span>{comment.rating} / 5</span>
                       </div>
@@ -575,38 +585,42 @@ export default function UserPage() {
                         <span className="text-muted-foreground">Updated At</span>
                         <span>{formatDate(comment.updatedAt)}</span>
                       </div> */}
-                              <div className="flex items-center justify-between">
-                                <span className="text-muted-foreground">
-                                  Comment
-                                </span>
-                                <span>{comment.content}</span>
-                              </div>
-                            </div>
-                          ))}
-                      </li>
-                    ))}
-                  </ul>
-                  <Separator className="my-2" />
-                  <ul className="grid gap-3">
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Subtotal</span>
-                      <span>${selectedOrder.total.toFixed(2)}</span>
-                    </li>
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Shipping</span>
-                      <span>$0.00</span>
-                    </li>
-                    {/* <li className="flex items-center justify-between">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-muted-foreground">
+                                      Comment
+                                    </span>
+                                    <span>{comment.content}</span>
+                                  </div>
+                                </div>
+                              ))}
+                          </li>
+                        ))}
+                      </ul>
+                      <Separator className="my-2" />
+                      <ul className="grid gap-3">
+                        <li className="flex items-center justify-between">
+                          <span className="text-muted-foreground">
+                            Subtotal
+                          </span>
+                          <span>${selectedOrder.total.toFixed(2)}</span>
+                        </li>
+                        <li className="flex items-center justify-between">
+                          <span className="text-muted-foreground">
+                            Shipping
+                          </span>
+                          <span>$0.00</span>
+                        </li>
+                        {/* <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Tax</span>
                     <span>$25.00</span>
                   </li> */}
-                    <li className="flex items-center justify-between font-semibold">
-                      <span className="text-muted-foreground">Total</span>
-                      <span>${selectedOrder.total.toFixed(2)}</span>
-                    </li>
-                  </ul>
-                </div>
-                {/* <Separator className="my-4" />
+                        <li className="flex items-center justify-between font-semibold">
+                          <span className="text-muted-foreground">Total</span>
+                          <span>${selectedOrder.total.toFixed(2)}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    {/* <Separator className="my-4" />
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-3">
                   <div className="font-semibold">Shipping Information</div>
@@ -623,7 +637,7 @@ export default function UserPage() {
                   </div>
                 </div>
               </div> */}
-                {/* <Separator className="my-4" />
+                    {/* <Separator className="my-4" />
               <div className="grid gap-3">
                 <div className="font-semibold">Customer Information</div>
                 <dl className="grid gap-3">
@@ -645,48 +659,58 @@ export default function UserPage() {
                   </div>
                 </dl>
               </div> */}
-                <Separator className="my-4" />
-                <div className="grid gap-3">
-                  <div className="font-semibold">Payment Information</div>
-                  <dl className="grid gap-3">
-                    <div className="flex items-center justify-between">
-                      <dt className="flex items-center gap-1 text-muted-foreground">
-                        <CreditCard className="h-4 w-4" />
-                        Visa
-                      </dt>
-                      <dd>**** **** **** 4532</dd>
+                    <Separator className="my-4" />
+                    <div className="grid gap-3">
+                      <div className="font-semibold">Payment Information</div>
+                      <dl className="grid gap-3">
+                        <div className="flex items-center justify-between">
+                          <dt className="flex items-center gap-1 text-muted-foreground">
+                            <CreditCard className="h-4 w-4" />
+                            Visa
+                          </dt>
+                          <dd>**** **** **** 4532</dd>
+                        </div>
+                      </dl>
                     </div>
-                  </dl>
-                </div>
-              </CardContent>
-              <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
-                <div className="text-xs text-muted-foreground">
-                  Updated{" "}
-                  <time dateTime="2023-11-23">
-                    {formatDate(selectedOrder.updatedAt)}
-                  </time>
-                </div>
-                <Pagination className="ml-auto mr-0 w-auto">
-                  <PaginationContent>
-                    <PaginationItem>
-                      <Button size="icon" variant="outline" className="h-6 w-6">
-                        <ChevronLeft className="h-3.5 w-3.5" />
-                        <span className="sr-only">Previous Order</span>
-                      </Button>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <Button size="icon" variant="outline" className="h-6 w-6">
-                        <ChevronRight className="h-3.5 w-3.5" />
-                        <span className="sr-only">Next Order</span>
-                      </Button>
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-              </CardFooter>
-            </Card>
-          )}
+                  </CardContent>
+                  <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
+                    <div className="text-xs text-muted-foreground">
+                      Updated{" "}
+                      <time dateTime="2023-11-23">
+                        {formatDate(selectedOrder.updatedAt)}
+                      </time>
+                    </div>
+                    <Pagination className="ml-auto mr-0 w-auto">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-6 w-6"
+                          >
+                            <ChevronLeft className="h-3.5 w-3.5" />
+                            <span className="sr-only">Previous Order</span>
+                          </Button>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-6 w-6"
+                          >
+                            <ChevronRight className="h-3.5 w-3.5" />
+                            <span className="sr-only">Next Order</span>
+                          </Button>
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </CardFooter>
+                </Card>
+              )}
+            </div>
+          </main>
         </div>
-      </main>
-    </div>
+      )}
+    </>
   );
 }
