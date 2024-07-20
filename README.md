@@ -53,7 +53,7 @@ This separation allows for independent development and scaling of the frontend a
 
 ![image](public/productpage.png)
 
-## Animations
+## UIUX
 
 <img src="public/animation.gif" width="300">
 
