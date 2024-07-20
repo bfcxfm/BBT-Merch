@@ -398,10 +398,11 @@ This configuration serves the frontend from the `/dist` directory and proxies AP
    npm install
    ```
 
-3. Set up environment variables:
+3. Set up environment variables (production and development):
 
    ```
-   cp .env.example .env
+   touch .env.production
+   touch .env
    ```
 
    Edit the `.env` file with your configuration.
@@ -412,7 +413,7 @@ This configuration serves the frontend from the `/dist` directory and proxies AP
    npm run dev
    ```
 
-5. Build on cloud:
+5. Build Production on cloud:
 
    ```
    npm run build
